@@ -1,4 +1,4 @@
-.set-header{
+.set-header {
   background-color: lightsalmon;
   height: 100px;
 }
@@ -12,7 +12,7 @@
 }
 
 .card-grid {
-  display: grid; 
+  display: grid;
   grid-template-columns: auto auto auto auto;
   background-color: rgb(160, 8, 8);
   padding: 10px;
