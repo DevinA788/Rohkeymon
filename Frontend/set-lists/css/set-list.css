@@ -1,19 +1,19 @@
-.set-header{
+.set-header {
   background-color: lightsalmon;
   height: 100px;
 }
 
 .grid-flex-container {
   margin: 0;
-  padding-top: 0px;
+  padding-top: 0;
   background-color: rgb(220, 255, 192);
   display: flex;
   justify-content: center;
 }
 
 .card-grid {
-  display: grid; 
-  grid-template-columns: auto auto auto auto;
+  display: grid;
+  grid-template-columns: auto;
   background-color: rgb(160, 8, 8);
   padding: 10px;
   column-gap: 10px;
@@ -25,7 +25,7 @@
 .card-grid div {
   background-color: #f1f1f1;
   border: none;
-  padding: 0px 0px 0px 0px;
+  padding: 0px;
   font-size: 30px;
   text-align: center;
 }
@@ -35,4 +35,5 @@
   height: 100%;
   display: block;
   object-fit: contain;
+  margin: auto;
 }
