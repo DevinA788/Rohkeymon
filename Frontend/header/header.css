@@ -1,6 +1,6 @@
 .header {
   background-color: lightgray;
-  height: 75px;
+  height: 80px;
   display: flex;
   flex-direction: row;
   top: 0;
@@ -10,6 +10,11 @@
 
 .left-section {
   background-color: lightgreen;
+  align-items: center;
+}
+
+.site-logo {
+  height: 80px;
 }
 
 .middle-section {
