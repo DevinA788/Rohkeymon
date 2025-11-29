@@ -1,0 +1,21 @@
+.header {
+  background-color: lightgray;
+  height: 75px;
+  display: flex;
+  flex-direction: row;
+  top: 0;
+  position: fixed;
+
+}
+
+.left-section {
+  background-color: lightgreen;
+}
+
+.middle-section {
+  background-color: plum;
+}
+
+.right-section {
+  background-color: lightgreen;
+}
