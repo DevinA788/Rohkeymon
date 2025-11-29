@@ -1,6 +1,7 @@
 .header {
   background-color: lightgray;
   height: 80px;
+  width: 100vw;
   display: flex;
   flex-direction: row;
   top: 0;
@@ -11,16 +12,37 @@
 .left-section {
   background-color: lightgreen;
   align-items: center;
+  margin-left: 200px;
 }
 
 .site-logo {
   height: 80px;
+  align-items: right;
 }
 
 .middle-section {
   background-color: plum;
+  align-items: center;
+  display: flex;
+}
+
+.sets-link {
+  padding: 30px;
+}
+
+.decks-link {
+  padding: 30px;
 }
 
 .right-section {
   background-color: lightgreen;
+  align-items: center;
+  display: flex;
+  position: fixed;
+  right: 0;
+  height: 80px;
+}
+
+.account-link {
+  padding: 30px;
 }
