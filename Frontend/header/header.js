@@ -17,5 +17,8 @@ window.addEventListener('load', function() {
       <div class="sign-in-link">
       <a href="">Sign in</a>
       </div>
+      <div class="register-link">
+      <a href="">Register</a>
+      </div>
     </div>`;
 });
