@@ -18,6 +18,7 @@
 .site-logo {
   height: 80px;
   align-items: right;
+  cursor: pointer;
 }
 
 .middle-section {
@@ -28,10 +29,12 @@
 
 .sets-link {
   padding: 30px;
+  cursor: pointer;
 }
 
 .decks-link {
   padding: 30px;
+  cursor: pointer;
 }
 
 .right-section {
@@ -39,10 +42,11 @@
   align-items: center;
   display: flex;
   position: fixed;
-  right: 0;
+  right: 200px;
   height: 80px;
 }
 
-.account-link {
+.sign-in-link {
   padding: 30px;
+  cursor: pointer;
 }
