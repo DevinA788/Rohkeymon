@@ -7,3 +7,7 @@ body {
 .main-content {
   margin-top: 80px; /* Margin-top same height as header */
 }
+
+a:hover {
+  cursor: pointer;
+}
