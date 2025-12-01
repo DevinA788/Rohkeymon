@@ -4,7 +4,7 @@ window.addEventListener('load', function() {
   header.innerHTML = `    
   <div class="left-section">
       <div class="logo-container">
-        <!--<a href="/set-lists/index.html"><img class="site-logo" src="/header/TempLogo.png"></a>-->
+      <a href="/set-lists/index.html"><img class="site-logo" src="/header/TempLogo.png"></a>
       </div>
     </div>
     <div class="middle-section">
