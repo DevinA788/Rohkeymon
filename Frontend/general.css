@@ -5,5 +5,9 @@ body {
 }
 
 .main-content {
-  margin-top: 75px; /* Margin-top same height as header */
+  margin-top: 50px;/* Margin-top same height as header */
+}
+
+a:hover {
+  cursor: pointer;
 }
