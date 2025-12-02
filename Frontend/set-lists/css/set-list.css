@@ -7,15 +7,13 @@
 .grid-flex-container {
   margin: 0;
   padding-top: 0;
-  background-color: rgb(220, 255, 192);
   display: flex;
   justify-content: center;
 }
 
 .card-grid {
   display: grid;
-  grid-template-columns: auto;
-  background-color: rgb(160, 8, 8);
+  grid-template-columns: auto auto auto auto;
   padding: 10px;
   column-gap: 10px;
   row-gap: 10px;
