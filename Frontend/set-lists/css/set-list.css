@@ -5,6 +5,7 @@
 }
 
 .grid-flex-container {
+  height: 10000px;
   margin: 0;
   padding-top: 0;
   display: flex;
@@ -36,4 +37,20 @@
   display: block;
   object-fit: contain;
   margin: auto;
+}
+
+.add-to-deck {
+  position: absolute;
+  height: 25px;
+  width: 25px;
+  margin-left: 75px;
+  margin-top: 48px;
+}
+
+.remove-from-deck {
+  position: absolute;
+  height: 25px;
+  width: 25px;
+  margin-left: 75px;
+  margin-top: 88px;
 }
