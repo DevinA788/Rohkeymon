@@ -11,3 +11,7 @@ body {
 a:hover {
   cursor: pointer;
 }
+
+button:hover {
+  cursor: pointer;
+}
