@@ -1,6 +1,6 @@
 window.addEventListener('load', function() { 
   const setList=document.getElementById("cardgrid")
-    for (let i = 1; i < 103; i++){ //102 unique cards in base set 1 
+    for (let id = 1; id < 103; id++){ //102 unique cards in base set 1 
         const card=document.createElement("div")
         const img=document.createElement("img")
         const addToDeck=document.createElement("BUTTON")
@@ -9,7 +9,7 @@ window.addEventListener('load', function() {
         removeFromDeck.className='remove-from-deck'
         addToDeck.innerText = '+'
         removeFromDeck.innerText = '-'
-        img.src=`https://images.pokemontcg.io/base1/${i}.png`
+        img.src=`https://images.pokemontcg.io/base1/${id}.png`
         card.className="card-item"
         card.appendChild(addToDeck)
         card.appendChild(removeFromDeck)
