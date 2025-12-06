@@ -47,6 +47,10 @@
   margin-top: 48px;
 }
 
+.add-to-deck disabled {
+  color: gray;
+}
+
 .remove-from-deck {
   position: absolute;
   height: 25px;
