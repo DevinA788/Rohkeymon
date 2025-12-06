@@ -5,9 +5,14 @@ window.addEventListener('load', function() {
         const img=document.createElement("img")
         const addToDeck=document.createElement("BUTTON")
         addToDeck.className='add-to-deck'
+        addToDeck.cardNumber = id
         const removeFromDeck=document.createElement("BUTTON")
         removeFromDeck.className='remove-from-deck'
         addToDeck.innerText = '+'
+        addToDeck.addEventListener("click", (e)=>{
+          this.alert(`Pokemon card # ${id}`)
+        })
+          //Logic here use e.target for button info like stored card ID
         removeFromDeck.innerText = '-'
         img.src=`https://images.pokemontcg.io/base1/${id}.png`
         card.className="card-item"
