@@ -59,11 +59,16 @@
   margin-top: 88px;
 }
 
+.decklist-button-container {
+  padding: 10px;
+}
+
 .decklist-button {
-  padding: 5px;
+  padding: 10px;
   height: 75px;
   width: 75px;
   align-items: center;
+  position: fixed;
 }
 
 .decklist-button img {
