@@ -1,8 +1,9 @@
 const BASE_SET_ONE_UNIQUES = 102
+var cardId = 0
 
 window.addEventListener('load', function() { 
   const setList=document.getElementById("cardgrid")
-    for (let cardId = 0; cardId < BASE_SET_ONE_UNIQUES; cardId++){
+    for (cardId; cardId < BASE_SET_ONE_UNIQUES; cardId++){
         const card=document.createElement("div")
         const img=document.createElement("img")
         const addToDeck=document.createElement("BUTTON")
@@ -30,16 +31,29 @@ window.addEventListener('load', function() {
 });
 
 async function addingToDeck(id) {
+  document.getElementById(event.target.id).disabled = true
+  const response = await fetch(`https://api.pokemontcg.io/v2/cards/base1-${id}`)
+
+  if (!response.ok) {
+    const message = `There was a problem: Error ${response.status}`
+    throw new Error(message)
+  }
+
+  const data = await response.json()
+  console.log(data)
+
+  //document.getElementById(event.target.id).disabled = false
+}
+
+
+/*async function addingToDeck(id) {
   //Disable button
-  await fetch("call API here").then(r=r.json()).then(data=>{
+  await fetch(`https://api.pokemontcg.io/v2/cards/base1/${cardId}`).then(r=r.json()).then(data=>{
     console.log(data)
     // https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch
   }).finally(()=>{
     // TODO: Add alert
+    alert(`Pokemon card #${event.target.id}`)
     //Reenable Button
   })
-}
-
-//<div class="card-item">
-//<img src="https://images.pokemontcg.io/xy1/1.png" width="100" />
-//</div>
+}*/
