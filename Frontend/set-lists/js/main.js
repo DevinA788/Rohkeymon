@@ -31,7 +31,7 @@ window.addEventListener('load', function() {
 });
 
 async function addingToDeck(id) {
-  document.getElementById(event.target.id).disabled = true
+  //document.getElementById(event.target.id).disabled = true
   const response = await fetch(`https://api.pokemontcg.io/v2/cards/base1-${id}`)
 
   if (!response.ok) {
