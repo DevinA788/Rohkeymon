@@ -2,14 +2,12 @@ package com.rohkeymon.SpringBootAPI.MainController;
 
 import com.rohkeymon.SpringBootAPI.database.Cards;
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(
@@ -35,5 +33,15 @@ public class MainController {
         List<Cards> alldata = this.jdbcTemplate.query(sql, rm);
         return alldata;
     }
+
+   @PostMapping("add-to-deck")
+    public void createCards(@RequestBody Cards cards) {
+       System.out.println("cards ->"+cards);
+    }
+        //String card_id = body.get("card_id");
+        //Cards cards = new Cards(card_id);
+
+        //String sqlInsert = "INSERT INTO cards ("card_id ") VALUES (?);";
+
 }
 

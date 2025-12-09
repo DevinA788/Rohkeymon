@@ -1,4 +1,4 @@
-package database;
+package com.rohkeymon.SpringBootAPI.database;
 
 public class Users {
     private String username;
