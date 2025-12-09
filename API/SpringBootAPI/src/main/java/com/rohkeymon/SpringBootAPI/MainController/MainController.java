@@ -30,7 +30,8 @@ public class MainController {
     List<Cards> alldata() {
         RowMapper<Cards> rm = new BeanPropertyRowMapper(Cards.class);
         String sql = "SELECT * from cards;";
-        List<Cards> alldata = this.jdbcTemplate.query(sql, rm);
+        List<Cards> alldata;
+        alldata = this.jdbcTemplate.query(sql, rm);
         return alldata;
     }
 
