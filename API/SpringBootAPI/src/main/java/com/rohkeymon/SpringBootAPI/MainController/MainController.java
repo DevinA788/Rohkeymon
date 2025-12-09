@@ -28,7 +28,7 @@ public class MainController {
 
     @GetMapping({"alldata"})
     List<Cards> alldata() {
-        RowMapper<Cards> rm = new BeanPropertyRowMapper(Cards.class);
+        RowMapper<Cards> rm = new BeanPropertyRowMapper<>(Cards.class);
         String sql = "SELECT * from cards;";
         List<Cards> alldata;
         alldata = this.jdbcTemplate.query(sql, rm);
