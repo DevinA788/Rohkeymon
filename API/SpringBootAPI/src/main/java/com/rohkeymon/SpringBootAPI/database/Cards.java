@@ -1,5 +1,8 @@
 package com.rohkeymon.SpringBootAPI.database;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class Cards {
     private String decklist_order;
     private String decklist_id;
@@ -46,5 +49,8 @@ public class Cards {
                 ", card_id='" + card_id + '\'' +
                 ", card_copies='" + card_copies + '\'' +
                 '}';
+    }
+
+    public void add(Cards cards) {
     }
 }
