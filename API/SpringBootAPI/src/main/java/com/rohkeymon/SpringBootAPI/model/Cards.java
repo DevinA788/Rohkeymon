@@ -1,8 +1,10 @@
-package com.rohkeymon.SpringBootAPI.database;
+package com.rohkeymon.SpringBootAPI.model;
 
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 @Component
+@Scope("prototype")
 public class Cards {
     private String decklist_order;
     private String decklist_id;
