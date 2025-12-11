@@ -32,7 +32,7 @@ window.addEventListener('load', function() {
 
 async function addingToDeck(id) {
   //document.getElementById(event.target.id).disabled = true
-  const response = await fetch(`http://localhost:8080/Rohkeymon/add-to-deck`)
+  const response = await fetch("http://localhost:8080/Rohkeymon/add-to-deck")
   method: "POST"
   body: JSON.stringify({
     card_copies: "1",
@@ -45,9 +45,6 @@ async function addingToDeck(id) {
     const message = `There was a problem: Error ${response.status}`
     throw new Error(message)
   }
-
-  const data = await response.json()
-  console.log(data)
 
   //document.getElementById(event.target.id).disabled = false
 }
