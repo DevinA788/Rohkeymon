@@ -16,10 +16,12 @@ public class SpringBootApiApplication implements CommandLineRunner {
     }
 
     public void run(String... args) throws Exception {
-        int result = (Integer)this.jdbcTemplate.queryForObject("SELECT COUNT(*) FROM users", Integer.class);
+        int result = this.jdbcTemplate.queryForObject("SELECT COUNT(*) FROM users", Integer.class);
         if (result > 0) {
-            System.out.println(result + " <---- Here, Dev.");
+            System.out.println("Connected to SQL database.");
         }
-
+        else {
+            System.out.println("Unable to connect to SQL database.");
+        }
     }
 }

@@ -1,15 +1,12 @@
 package com.rohkeymon.SpringBootAPI.MainController;
 
-import com.rohkeymon.SpringBootAPI.database.Cards;
+import com.rohkeymon.SpringBootAPI.model.Cards;
+import com.rohkeymon.SpringBootAPI.repo.CardsRepo;
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(
@@ -21,6 +18,9 @@ public class MainController {
     @Autowired
     JdbcTemplate jdbcTemplate;
 
+    @Autowired
+    CardsRepo cardsRepo;
+
     @GetMapping(
             path = {"test"}
     )
@@ -30,10 +30,17 @@ public class MainController {
 
     @GetMapping({"alldata"})
     List<Cards> alldata() {
-        RowMapper<Cards> rm = new BeanPropertyRowMapper(Cards.class);
-        String sql = "SELECT * from cards;";
-        List<Cards> alldata = this.jdbcTemplate.query(sql, rm);
-        return alldata;
+        return cardsRepo.findAll();
     }
+
+    @PostMapping("add-to-deck")
+    public Cards save(@RequestBody Cards cards) {
+       cardsRepo.save(cards);
+        return cards;
+
+    }
+        //String card_id = body.get("card_id");
+        //Cards cards = new Cards(card_id);*/
+
 }
 

@@ -1,5 +1,10 @@
-package com.rohkeymon.SpringBootAPI.database;
+package com.rohkeymon.SpringBootAPI.model;
 
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
+
+@Component
+@Scope("prototype")
 public class Cards {
     private String decklist_order;
     private String decklist_id;
@@ -36,5 +41,18 @@ public class Cards {
 
     public void setCard_copies(String card_copies) {
         this.card_copies = card_copies;
+    }
+
+    @Override
+    public String toString() {
+        return "Cards{" +
+                "decklist_order='" + decklist_order + '\'' +
+                ", decklist_id='" + decklist_id + '\'' +
+                ", card_id='" + card_id + '\'' +
+                ", card_copies='" + card_copies + '\'' +
+                '}';
+    }
+
+    public void add(Cards cards) {
     }
 }
