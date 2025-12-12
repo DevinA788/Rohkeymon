@@ -27,11 +27,11 @@ public class CardsRepo {
 
     public void save(Cards cards){
 
-        String sqlInsert = "INSERT INTO cards (decklist_order, decklist_id, card_id, card_copies) VALUES (?, ?, ?, ?);";
+        String sqlInsert = "INSERT INTO cards (decklist_id, card_id, card_copies) VALUES (?, ?, ?);";
 
         System.out.println(cards);
 
-        jdbcTemplate.update(sqlInsert, cards.getDecklist_order(), cards.getDecklist_id(), cards.getCard_id(), cards.getCard_copies());
+        jdbcTemplate.update(sqlInsert, cards.getDecklist_id(), cards.getCard_id(), cards.getCard_copies());
 
     }
 

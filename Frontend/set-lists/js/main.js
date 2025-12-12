@@ -31,22 +31,22 @@ window.addEventListener('load', function() {
 });
 
 async function addingToDeck(id) {
-  //document.getElementById(event.target.id).disabled = true
-  const response = await fetch("http://localhost:8080/Rohkeymon/add-to-deck")
-  method: "POST"
+  document.getElementById(event.target.id).disabled = true
+  const response = await fetch("http://localhost:8080/Rohkeymon/add-to-deck", {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json",
+  },
   body: JSON.stringify({
     card_copies: "1",
     card_id: `base1-${id}`,
-    decklist_id: "44764e09-bf3d-11f0-a784-d8bbc1d9bfc1",
-    decklist_order: "6"
-  })
+    decklist_id: "44764e09-bf3d-11f0-a784-d8bbc1d9bfc1"
+  }),
 
-  if (!response.ok) {
-    const message = `There was a problem: Error ${response.status}`
-    throw new Error(message)
-  }
+  
 
   //document.getElementById(event.target.id).disabled = false
+})
 }
 
 

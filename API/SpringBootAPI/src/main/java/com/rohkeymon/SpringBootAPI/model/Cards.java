@@ -6,18 +6,18 @@ import org.springframework.stereotype.Component;
 @Component
 @Scope("prototype")
 public class Cards {
-    private String decklist_order;
+    //private String decklist_order;
     private String decklist_id;
     private String card_id;
     private String card_copies;
 
-    public String getDecklist_order() {
+    /*public String getDecklist_order() {
         return this.decklist_order;
     }
 
     public void setDecklist_order(String decklist_order) {
         this.decklist_order = decklist_order;
-    }
+    }*/
 
     public String getDecklist_id() {
         return this.decklist_id;
@@ -46,7 +46,6 @@ public class Cards {
     @Override
     public String toString() {
         return "Cards{" +
-                "decklist_order='" + decklist_order + '\'' +
                 ", decklist_id='" + decklist_id + '\'' +
                 ", card_id='" + card_id + '\'' +
                 ", card_copies='" + card_copies + '\'' +
