@@ -16,11 +16,6 @@ window.addEventListener('load', function() {
           await addingToDeck(event.target.id)
           //alert(`Added base-1, card# ${event.target.id} to deck.`)
         })
-          
-          
-          
-     
-          
         removeFromDeck.innerText = '-'
         img.src=`https://images.pokemontcg.io/base1/${cardId+1}.png`
 
