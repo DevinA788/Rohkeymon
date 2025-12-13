@@ -13,6 +13,16 @@
   position: fixed;
 }
 
+.decklistTab .button .close{
+  background-color: red;
+  color: white;
+  border: none;
+  font-size: 20px;
+  height: 100%;
+  width: 100%;
+  cursor: pointer;
+}
+
 .decklistButton img {
   object-fit: fill;
   height: 100%;
@@ -24,6 +34,17 @@
   background-color: black;
   color: white;
   position: fixed;
-  inset: 0 0 0 auto;
+  inset: 0 -500px 0 auto;
   z-index: 100;
+  transition: inset 0.5s ease-in-out;
+}
+
+body.showDecklist .decklistTab {
+  width: 500px;
+  background-color: black;
+  color: white;
+  position: fixed;
+  z-index: 100;
+  inset: 0 0 0 auto;
+  transition: inset 0.5s ease-in-out;
 }
