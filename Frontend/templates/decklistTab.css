@@ -1,0 +1,29 @@
+.decklistButtonContainer {
+  padding: 10px;
+  display: flex;
+  justify-content: right;
+  margin: auto 250px auto auto;
+}
+
+.decklistButton {
+  padding: 10px;
+  height: 75px;
+  width: 75px;
+  align-items: center;
+  position: fixed;
+}
+
+.decklistButton img {
+  object-fit: fill;
+  height: 100%;
+  width: 100%;
+}
+
+.decklistTab {
+  width: 500px;
+  background-color: black;
+  color: white;
+  position: fixed;
+  inset: 0 0 0 auto;
+  z-index: 100;
+}
