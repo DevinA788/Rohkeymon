@@ -2,7 +2,6 @@
   padding: 10px;
   display: flex;
   justify-content: right;
-  margin: auto 250px auto auto;
 }
 
 .decklistButton {
@@ -11,16 +10,6 @@
   width: 75px;
   align-items: center;
   position: fixed;
-}
-
-.decklistTab .button .close{
-  background-color: red;
-  color: white;
-  border: none;
-  font-size: 20px;
-  height: 100%;
-  width: 100%;
-  cursor: pointer;
 }
 
 .decklistButton img {
@@ -34,9 +23,11 @@
   background-color: black;
   color: white;
   position: fixed;
-  inset: 0 -500px 0 auto;
+  inset: 50px -500px 0 auto;
   z-index: 2000;
   transition: inset 0.5s ease-in-out;
+  display: grid;
+  grid-template-rows: 1fr 1fr 50px;
 }
 
 #decklistContainer.showDecklist .decklistTab {
@@ -44,8 +35,28 @@
   background-color: black;
   color: white;
   position: fixed;
-  z-index: 100;
-  inset: 0 0 0 auto;
+  inset: 50px 0 0 auto;
   z-index: 2000;
   transition: inset 0.5s ease-in-out;
+}
+
+.decklistTab .button .close{
+  background-color: red;
+  color: white;
+  border: none;
+  font-size: 20px;
+  height: 100%;
+  width: 100%;
+  cursor: pointer;
+}
+
+.decklistTab h1 {
+  text-align: center;
+  margin: 0;
+}
+
+.decklist {
+  background-color: black;
+  color: white;
+  overflow-y: scroll;
 }
