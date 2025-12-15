@@ -1,12 +1,12 @@
 
 let decklistButton = document.querySelector('.decklistButton');
-let closeDecklist = document.querySelector('.close')
-let body = document.querySelector('body');
+let closeDecklist = document.querySelector('.close');
+let toggleContainer = document.querySelector('#decklistContainer');
 
 decklistButton.addEventListener('click', () => {
-  body.classList.toggle('showDecklist');
+  toggleContainer.classList.toggle('showDecklist');
 });
 
 closeDecklist.addEventListener('click', () => {
-  body.classList.toggle('showDecklist');
+  toggleContainer.classList.toggle('showDecklist');
 });
