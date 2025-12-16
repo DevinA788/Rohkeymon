@@ -20,7 +20,7 @@
 
 .decklistTab {
   width: 500px;
-  background-color: black;
+  background-image: url("what-the-hex-dark.png");
   color: white;
   position: fixed;
   inset: 50px -500px 0 auto;
@@ -32,7 +32,7 @@
 
 #decklistContainer.showDecklist .decklistTab {
   width: 500px;
-  background-color: black;
+  background-image: url("what-the-hex-dark.png");
   color: white;
   position: fixed;
   inset: 50px 0 0 auto;

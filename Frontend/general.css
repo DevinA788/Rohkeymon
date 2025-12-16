@@ -2,11 +2,13 @@ body {
   margin: 0;
   padding: 0;
   background-color: rgb(196, 196, 196);
+  background-image: url("templates/stardust.png");
+  background-attachment: fixed;
 }
 
 .main-content {
   margin-top: 50px;/* Margin-top same height as header */
-  background-color: rgba(72 54 117);
+  /*background-color: rgba(72 54 117);*/
 }
 
 a:hover {

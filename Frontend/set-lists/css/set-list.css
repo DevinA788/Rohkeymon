@@ -1,9 +1,10 @@
 .set-header {
-  background-color: rgb(72 54 117);
-  height: 50px;
-  line-height: 50px;
+  background-image: url("templates/stardust.png");
+  height: 25px;
+  margin-top: 75px;
   text-align: center;
-  color: rgb(255, 255, 255);
+  color: rgb(0, 217, 133);
+  font: bold 24px 'Lato', sans-serif;
 }
 
 .grid-flex-container {
