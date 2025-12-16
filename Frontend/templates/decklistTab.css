@@ -22,6 +22,7 @@
   width: 500px;
   background-image: url("what-the-hex-dark.png");
   color: white;
+  font: Lato, sans-serif;
   position: fixed;
   inset: 50px -500px 0 auto;
   z-index: 2000;
