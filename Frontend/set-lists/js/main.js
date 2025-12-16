@@ -31,7 +31,7 @@ window.addEventListener('load', function() {
 async function addingToDeck(id) {
   document.getElementById(event.target.id).disabled = true
   
-  const response = await fetch("http://localhost:8080/Rohkeymon/add-to-deck", {
+  const response = await fetch("http://localhost:8080/api/add-to-deck", {
     method: "POST",
     headers: {"Content-Type": "application/json",},
     body: JSON.stringify({
