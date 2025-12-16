@@ -50,6 +50,12 @@
   cursor: pointer;
 }
 
+.decklistTabHeader {
+  height: 5vh;
+  display: grid;
+  grid-template-columns: 1fr 40px;
+  border-color: red;
+}
 .decklistTab h1 {
   text-align: center;
   margin: 0;

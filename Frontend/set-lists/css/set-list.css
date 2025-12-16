@@ -1,7 +1,9 @@
 .set-header {
-  background-color: lightsalmon;
-  height: 20px;
+  background-color: rgb(72 54 117);
+  height: 50px;
+  line-height: 50px;
   text-align: center;
+  color: rgb(255, 255, 255);
 }
 
 .grid-flex-container {

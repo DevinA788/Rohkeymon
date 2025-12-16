@@ -6,6 +6,7 @@ body {
 
 .main-content {
   margin-top: 50px;/* Margin-top same height as header */
+  background-color: rgba(72 54 117);
 }
 
 a:hover {
