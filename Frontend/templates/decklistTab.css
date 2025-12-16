@@ -1,0 +1,76 @@
+.decklistButtonContainer {
+  padding: 10px;
+  display: flex;
+  justify-content: right;
+}
+
+.decklistButton {
+  padding: 10px;
+  height: 75px;
+  width: 75px;
+  align-items: center;
+  position: fixed;
+}
+
+.decklistButton img {
+  object-fit: fill;
+  height: 100%;
+  width: 100%;
+}
+
+.decklistTab {
+  width: 500px;
+  background-image: url("what-the-hex-dark.png");
+  color: white;
+  font-family: Lato, sans-serif;
+  position: fixed;
+  inset: 50px -500px 0 auto;
+  z-index: 2000;
+  transition: inset 0.5s ease-in-out;
+  display: grid;
+  grid-template-rows: 1fr 1fr 50px;
+}
+
+#decklistContainer.showDecklist .decklistTab {
+  width: 500px;
+  background-image: url("what-the-hex-dark.png");
+  color: white;
+  position: fixed;
+  inset: 50px 0 0 auto;
+  z-index: 2000;
+  transition: inset 0.5s ease-in-out;
+}
+
+.decklistTab .button .close{
+  background-color: red;
+  color: white;
+  border: none;
+  font-size: 20px;
+  height: 100%;
+  width: 100%;
+  cursor: pointer;
+}
+
+.decklistTabHeader {
+  height: 5vh;
+  display: grid;
+  grid-template-columns: 1fr 40px;
+  border-color: red;
+}
+.decklistTab h1 {
+  text-align: center;
+  margin: 0;
+}
+
+.decklist {
+  background-color: white;
+  color: black;
+  overflow-y: scroll;
+  height: 80vh;
+}
+
+.decklist .pokemonCard {
+  display: grid;
+  grid-template-columns: 70px 150px 50px;
+  border: red;
+}

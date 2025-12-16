@@ -1,5 +1,5 @@
 .header {
-  background-color: lightgray;
+  background-color: rgb(2 0 11);
   height: 50px;
   width: 100vw;
   display: flex;
@@ -8,10 +8,11 @@
   position: fixed;
   justify-content: space-between;
   z-index: 1000;
+  font-family: 'Lato', sans-serif;
 }
 
 .left-section {
-  background-color: lightgreen;
+  background-color: rgb(2 0 11);
   align-items: center;
   margin-left: 200px;
   display: flex;
@@ -23,13 +24,27 @@
   width: 100%;
 }
 
-.site-logo {
+.rohkeymon-logo {
+  height: 100%;
+  width: 100%;
+  object-fit: contain;
+}
+
+.haunter-container {
+  overflow: hidden;
   height: 100%;
   width: 100%;
 }
 
+.site-logo {
+  height: 100%;
+  width: 100%;
+  object-fit: contain;
+}
+
 .middle-section {
-  background-color: plum;
+  background-color: rgb(2 0 11);
+  color: white;
   align-items: center;
   display: flex;
   flex: 2;
@@ -44,7 +59,7 @@
 }
 
 .right-section {
-  background-color: lightgreen;
+  background-color: rgb(2 0 11);
   align-items: center;
   display: flex;
 }
