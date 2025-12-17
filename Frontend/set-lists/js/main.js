@@ -14,7 +14,7 @@ window.addEventListener('load', function() {
         addToDeck.innerText = '+'
         addToDeck.addEventListener("click", async (event)=> {
           await addingToDeck(event.target.id)
-          //alert(`Added base-1, card# ${event.target.id} to deck.`)
+          alert(`Added base-1, card# ${event.target.id} to deck.`)
         })
         removeFromDeck.innerText = '-'
         img.src=`https://images.pokemontcg.io/base1/${cardId+1}.png`
@@ -41,8 +41,8 @@ async function addingToDeck(id) {
     }),
   })
   
-  setTimeout(() => {
+  
     document.getElementById(id).disabled = false
-  }, 500)
+  
 }
 
