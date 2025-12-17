@@ -19,20 +19,18 @@ window.addEventListener('load', function() {
         })
         removeFromDeck.innerText = '-'
         img.src=`https://images.pokemontcg.io/base1/${cardId+1}.png`
-        
         setList.appendChild(card)
         card.className="card-item"
-        
         addToDeck.appendChild(img)
         card.appendChild(addToDeck)
-        //card.appendChild(img)
+        
         
       }
     // NOTE: innerText for variables.
 });
 
 async function addingToDeck(id) {
-  //document.getElementById(event.target.id).disabled = true
+  document.getElementById(id).disabled = true
   
   const response = await fetch("http://localhost:8080/api/add-to-deck", {
     method: "POST",
@@ -45,16 +43,8 @@ async function addingToDeck(id) {
   })
   
   
-    //document.getElementById(id).disabled = false
+    document.getElementById(id).disabled = false
   
 }
 
-/*function addingToDecklistTab(id) {
-  console.log("Adding to decklist tab")
-  const decklistTab = document.getElementById("decklist")
-  const tabCard=document.createElement("div")
-  tabCard.id = id + 1
-  tabCard.className="tabCard"
-  decklistTab.appendChild(tabCard.id)
-}*/
 
