@@ -5,31 +5,34 @@ window.addEventListener('load', function() {
   const setList=document.getElementById("cardgrid")
     for (cardId; cardId < BASE_SET_ONE_UNIQUES; cardId++){
         const card=document.createElement("div")
-        const img=document.createElement("img")
         const addToDeck=document.createElement("BUTTON")
+        const img=document.createElement("img")
         addToDeck.className='add-to-deck'
         addToDeck.id = cardId + 1  
         const removeFromDeck=document.createElement("BUTTON")
         removeFromDeck.className='remove-from-deck'
-        addToDeck.innerText = '+'
+        
         addToDeck.addEventListener("click", async (event)=> {
-          await addingToDeck(event.target.id)
-          alert(`Added base-1, card# ${event.target.id} to deck.`)
+          await addingToDeck(event.currentTarget.id)
+          alert(`Added base-1, card #${addToDeck.id} to deck.`)
+          //addingToDecklistTab(event.target.id)
         })
         removeFromDeck.innerText = '-'
         img.src=`https://images.pokemontcg.io/base1/${cardId+1}.png`
-
-        card.className="card-item"
-        card.appendChild(addToDeck)
-        card.appendChild(removeFromDeck)
-        card.appendChild(img)
+        
         setList.appendChild(card)
+        card.className="card-item"
+        
+        addToDeck.appendChild(img)
+        card.appendChild(addToDeck)
+        //card.appendChild(img)
+        
       }
     // NOTE: innerText for variables.
 });
 
 async function addingToDeck(id) {
-  document.getElementById(event.target.id).disabled = true
+  //document.getElementById(event.target.id).disabled = true
   
   const response = await fetch("http://localhost:8080/api/add-to-deck", {
     method: "POST",
@@ -42,7 +45,16 @@ async function addingToDeck(id) {
   })
   
   
-    document.getElementById(id).disabled = false
+    //document.getElementById(id).disabled = false
   
 }
+
+/*function addingToDecklistTab(id) {
+  console.log("Adding to decklist tab")
+  const decklistTab = document.getElementById("decklist")
+  const tabCard=document.createElement("div")
+  tabCard.id = id + 1
+  tabCard.className="tabCard"
+  decklistTab.appendChild(tabCard.id)
+}*/
 

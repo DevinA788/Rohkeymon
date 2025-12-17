@@ -43,15 +43,18 @@
 }
 
 .add-to-deck {
-  position: absolute;
-  height: 25px;
-  width: 25px;
-  margin-left: 75px;
-  margin-top: 48px;
+  width: 100%;
+  max-width: 25vw;
+  height: auto;
+  display: block;
+  object-fit: contain;
+  margin: auto;
+  padding: 0;
+  border: none;
 }
 
 .add-to-deck disabled {
-  color: gray;
+  opacity: hidden;
 }
 
 .remove-from-deck {
