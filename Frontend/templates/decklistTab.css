@@ -24,11 +24,11 @@
   color: white;
   font-family: Lato, sans-serif;
   position: fixed;
-  inset: 50px -500px 0 auto;
   z-index: 2000;
   transition: inset 0.5s ease-in-out;
   display: grid;
   grid-template-rows: 1fr 1fr 50px;
+  visibility: hidden;
 }
 
 #decklistContainer.showDecklist .decklistTab {
@@ -39,6 +39,7 @@
   inset: 50px 0 0 auto;
   z-index: 2000;
   transition: inset 0.5s ease-in-out;
+  visibility: visible;
 }
 
 .decklistTab .button .close{
