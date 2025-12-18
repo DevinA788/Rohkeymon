@@ -42,4 +42,12 @@ public class CardsRepo {
         alldata = this.jdbcTemplate.query(sql, rm);
         return alldata;
     }
+
+    public List<Cards> decklistQuery(){
+        RowMapper<Cards> rm = new BeanPropertyRowMapper<>(Cards.class);
+        String sql = "SELECT * FROM cards WHERE decklist_id = '44764e09-bf3d-11f0-a784-d8bbc1d9bfc1';";
+        List<Cards> decklistQueryResult;
+        decklistQueryResult = this.jdbcTemplate.query(sql, rm);
+        return decklistQueryResult;
+    }
 }

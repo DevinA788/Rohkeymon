@@ -1,4 +1,4 @@
-function buildDecklistTab(cards = [{name: "Haunter", quantity: 2}]) { 
+function buildDecklistTab(cards) { 
   /*
   Builds decklist of cards from array of card objects. 
   Card objects should have name and quantity. 
@@ -25,7 +25,20 @@ function buildDecklistTab(cards = [{name: "Haunter", quantity: 2}]) {
   });
 }
 
-
+async function getDecklist() {
+  try {
+    const response = await fetch("http://localhost:8080/api/decklist");
+    if (response.ok) {
+      const data = await response.json();
+      console.log(data);
+      return data;
+    } else {
+      throw new Error('Failed to fetch decklist');
+    }
+  } catch (error) {
+    console.error('Error:', error);
+  }
+}
 
 function initializeDecklistTab() {
   let decklistButton = document.querySelector('.decklistButton');
@@ -48,13 +61,9 @@ window.addEventListener("load", function() {
 
   //create fetch here to acquire decklist card objects from API
 
-  const cards = [
-    {name: "Pikachu", quantity: 2},
-    {name: "Charizard", quantity: 1},
-    {name: "Bulbasaur", quantity: 3},
-    {name: "Water Energy", quantity: 10, cardClassName: "energyCard"},
-    {name: "Super Potion", quantity: 4, cardClassName: "trainerCard"} 
-  ];
+  cards = getDecklist();
+
+  
 
   document.querySelector(".decklist").append(...buildDecklistTab(cards));
 

@@ -39,6 +39,9 @@ public class MainController {
         return cardsRepo.findAll();
     }
 
+    @GetMapping({"decklist"})
+    List<Cards> decklistQueryResult() {return cardsRepo.decklistQuery();}
+
     @PostMapping("add-to-deck")
     public Cards save(@RequestBody Cards cards) {
        cardsRepo.save(cards);
