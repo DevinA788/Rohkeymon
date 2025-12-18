@@ -26,7 +26,7 @@ function initializeDecklistTab() {
   });
 };
 
-function showDecklist(deckUUID) {
+/*function showDecklist(deckUUID) {
   const response = await fetch("http://localhost:8080/api/alldata", {
     method: "GET",
     headers: {"Content-Type": "application/json",},
@@ -37,3 +37,4 @@ function showDecklist(deckUUID) {
     }),
   })
 }
+*/
