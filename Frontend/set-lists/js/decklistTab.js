@@ -1,10 +1,10 @@
-function buildDecklistTab(cards) { 
+function buildDecklistTab() { 
   /*
   Builds decklist of cards from array of card objects. 
   Card objects should have name and quantity. 
   Returns HTMLDivElement objects representing each card.
   */
-  return cards.map(({name: cardName, quantity}) => {
+  return cards.map(({card_copies, card_id}) => {
     const pokemonCard = document.createElement("div");
     pokemonCard.className = "pokemonCard";
     /*Can override class name for card(s) in the array if needed. Maybe use this to label energy cards because they can be > 4 copies. 
@@ -13,14 +13,14 @@ function buildDecklistTab(cards) {
     }*/
     const nameDiv = document.createElement("div");
     nameDiv.className = "name";
-    nameDiv.innerText = cardName;
+    nameDiv.innerText = card_id;
 
-    const quantityDiv = document.createElement("div");
-    quantityDiv.className = "quantity";
-    quantityDiv.innerText = quantity;
-
+    const copiesDiv = document.createElement("div");
+    copiesDiv.className = "copies";
+    copiesDiv.innerText = card_copies;
+    
     pokemonCard.appendChild(nameDiv);
-    pokemonCard.appendChild(quantityDiv);
+    pokemonCard.appendChild(copiesDiv);
     return pokemonCard;
   });
 }
@@ -30,7 +30,7 @@ async function getDecklist() {
     const response = await fetch("http://localhost:8080/api/decklist");
     if (response.ok) {
       const data = await response.json();
-      console.log(data);
+      //console.log(data);
       return data;
     } else {
       throw new Error('Failed to fetch decklist');
@@ -54,14 +54,20 @@ function initializeDecklistTab() {
   });
 };
 
-window.addEventListener("load", function() {
+window.addEventListener("load", async function() {
   //click handlers - disable addToDeck button
 
   initializeDecklistTab();
 
   //create fetch here to acquire decklist card objects from API
 
-  cards = getDecklist();
+  
+  cards = await getDecklist();
+
+  //figure out how to parse card_id into the actual card name e.g. pikachu
+  //figure out how to get decklist to show contents without needing to refresh page. 
+
+  console.log(cards);
 
   
 

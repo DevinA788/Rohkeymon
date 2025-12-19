@@ -29,7 +29,7 @@ public class CardsRepo {
 
         String sqlInsert = "INSERT INTO cards (decklist_id, card_id, card_copies) VALUES (?, ?, ?);";
 
-        System.out.println(cards);
+        
 
         jdbcTemplate.update(sqlInsert, cards.getDecklist_id(), cards.getCard_id(), cards.getCard_copies());
 
