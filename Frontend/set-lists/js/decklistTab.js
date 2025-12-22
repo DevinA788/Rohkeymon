@@ -19,7 +19,7 @@ function buildDecklistTab(cards) {
   Card objects should have name and quantity. 
   Returns HTMLDivElement objects representing each card.
   */
-  return cards.map(({card_copies, card_name}) => {
+  return cards.map(({card_copies, card_id, card_name}) => {
     const pokemonCard = document.createElement("div");
     pokemonCard.className = "pokemonCard";
     /*Can override class name for card(s) in the array if needed. Maybe use this to label energy cards because they can be > 4 copies. 
@@ -33,9 +33,21 @@ function buildDecklistTab(cards) {
     const copiesDiv = document.createElement("div");
     copiesDiv.className = "copies";
     copiesDiv.innerText = card_copies;
+
+    const addToDeck = document.createElement("BUTTON")
+    addToDeck.innerText = '+'
+    addToDeck.className='add-to-deck'
+    addToDeck.id = card_id;
+
+    /*const removeFromDeck = document.createElement("BUTTON")
+    removeFromDeck.innerText = '-'
+    removeFromDeck.className='remove-from-deck'
+    removeFromDeck.id = card_id;*/
     
     pokemonCard.appendChild(nameDiv);
     pokemonCard.appendChild(copiesDiv);
+    pokemonCard.appendChild(addToDeck);
+    //pokemonCard.appendChild(removeFromDeck);
     return pokemonCard;
   });
 }

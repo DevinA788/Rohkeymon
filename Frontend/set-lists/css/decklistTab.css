@@ -20,7 +20,7 @@
 
 .decklistTab {
   width: 500px;
-  /*background-image: url("what-the-hex-dark.png");*/
+  background-color: black;
   color: white;
   font-family: Lato, sans-serif;
   position: fixed;
@@ -33,7 +33,6 @@
 
 #decklistContainer.showDecklist .decklistTab {
   width: 500px;
-  /*background-image: url("what-the-hex-dark.png");*/
   color: white;
   position: fixed;
   inset: 50px 0 0 auto;
