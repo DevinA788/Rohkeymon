@@ -38,6 +38,11 @@ function buildDecklistTab(cards) {
     addToDeck.innerText = '+'
     addToDeck.className='add-to-deck'
     addToDeck.id = card_id;
+    addToDeck.addEventListener("click", async (event)=> {
+      await addingToDeck(addToDeck.id)
+      alert(`Added base-1, card #${addToDeck.id} to deck.`)
+      //addingToDecklistTab(event.target.id)
+    })
 
     /*const removeFromDeck = document.createElement("BUTTON")
     removeFromDeck.innerText = '-'
@@ -84,17 +89,13 @@ function initializeDecklistTab() {
 };
 
 window.addEventListener("load", async function() {
-  //click handlers - disable addToDeck button
+  //TODO: click handlers - disable addToDeck button
 
   initializeDecklistTab();
 
-  //create fetch here to acquire decklist card objects from API
+  data = await getDecklist(); //This fetch gets decklist card objects from API
 
-  
-  data = await getDecklist();
-
-  //figure out how to parse card_id into the actual card name e.g. pikachu
-  //figure out how to get decklist to show contents without needing to refresh page. 
+  //TODO: figure out how to get decklist to show contents without needing to refresh page. 
 
   const cards = await Promise.all(
     data.map(async (card) => {
@@ -106,12 +107,25 @@ window.addEventListener("load", async function() {
     })
   );
   console.log(cards);
-//write loop that goes through each element and grabs the card_id attribute so it can be put into the above getName API call.
-//Somehow replace the returned Pokemon Name from the api call in the JSON, then plug that into buildDecklistTab(). 
   
-
   document.querySelector(".decklist").append(...buildDecklistTab(cards));
 
-  //click handlers - reenable addToDeck button 
+  //TODO: click handlers - reenable addToDeck button 
 });
 
+//TODO: decklist tab addToDeck button, different from set-list add to deck button. currently this is appending a new card object to the end of the decklist. All we want here is to increase quantity.
+async function addingToDeck(id) {
+  document.getElementById(id).disabled = true
+  
+  const response = await fetch("http://localhost:8080/api/add-to-deck", {
+    method: "POST",
+    headers: {"Content-Type": "application/json",},
+    body: JSON.stringify({
+      card_copies: "1",
+    }),
+  })
+  
+  
+    document.getElementById(id).disabled = false
+  
+}
