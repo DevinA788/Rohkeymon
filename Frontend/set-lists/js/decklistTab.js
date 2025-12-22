@@ -38,11 +38,11 @@ function buildDecklistTab(cards) {
     addToDeck.innerText = '+'
     addToDeck.className='add-to-deck'
     addToDeck.id = card_id;
-    addToDeck.addEventListener("click", async (event)=> {
-      await addingToDeck(addToDeck.id)
+    /*addToDeck.addEventListener("click", async (event)=> {
+      await incrementCopies(addToDeck.id)
       alert(`Added base-1, card #${addToDeck.id} to deck.`)
       //addingToDecklistTab(event.target.id)
-    })
+    })*/
 
     /*const removeFromDeck = document.createElement("BUTTON")
     removeFromDeck.innerText = '-'
@@ -114,7 +114,7 @@ window.addEventListener("load", async function() {
 });
 
 //TODO: decklist tab addToDeck button, different from set-list add to deck button. currently this is appending a new card object to the end of the decklist. All we want here is to increase quantity.
-async function addingToDeck(id) {
+/*async function incrementCopies(id) {
   document.getElementById(id).disabled = true
   
   const response = await fetch("http://localhost:8080/api/add-to-deck", {
@@ -128,4 +128,4 @@ async function addingToDeck(id) {
   
     document.getElementById(id).disabled = false
   
-}
+}*/
