@@ -1,10 +1,25 @@
-function buildDecklistTab() { 
+async function getName(card_id) {
+  try {
+    const response = await fetch(`https://api.tcgdex.net/v2/en/cards/${card_id}`);
+    if (response.ok) {
+      const data = await response.json();
+      console.log(data.name);
+      return data.name;
+    } else {
+      throw new Error('Failed to fetch decklist');
+    }
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+function buildDecklistTab(cards) { 
   /*
   Builds decklist of cards from array of card objects. 
   Card objects should have name and quantity. 
   Returns HTMLDivElement objects representing each card.
   */
-  return cards.map(({card_copies, card_id}) => {
+  return cards.map(({card_copies, card_name}) => {
     const pokemonCard = document.createElement("div");
     pokemonCard.className = "pokemonCard";
     /*Can override class name for card(s) in the array if needed. Maybe use this to label energy cards because they can be > 4 copies. 
@@ -13,7 +28,7 @@ function buildDecklistTab() {
     }*/
     const nameDiv = document.createElement("div");
     nameDiv.className = "name";
-    nameDiv.innerText = card_id;
+    nameDiv.innerText = card_name;
 
     const copiesDiv = document.createElement("div");
     copiesDiv.className = "copies";
@@ -40,6 +55,8 @@ async function getDecklist() {
   }
 }
 
+
+
 function initializeDecklistTab() {
   let decklistButton = document.querySelector('.decklistButton');
   let closeDecklist = document.querySelector('.close');
@@ -62,16 +79,27 @@ window.addEventListener("load", async function() {
   //create fetch here to acquire decklist card objects from API
 
   
-  cards = await getDecklist();
+  data = await getDecklist();
 
   //figure out how to parse card_id into the actual card name e.g. pikachu
   //figure out how to get decklist to show contents without needing to refresh page. 
 
+  const cards = await Promise.all(
+    data.map(async (card) => {
+      const cardName = await getName(card.card_id);
+      return {
+        ...card, //Instead of returning properties manually, allows new properties to be added later on
+        card_name: cardName
+      };
+    })
+  );
   console.log(cards);
-
+//write loop that goes through each element and grabs the card_id attribute so it can be put into the above getName API call.
+//Somehow replace the returned Pokemon Name from the api call in the JSON, then plug that into buildDecklistTab(). 
   
 
   document.querySelector(".decklist").append(...buildDecklistTab(cards));
 
   //click handlers - reenable addToDeck button 
 });
+
