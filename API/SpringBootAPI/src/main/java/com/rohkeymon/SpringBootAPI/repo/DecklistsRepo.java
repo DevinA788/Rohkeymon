@@ -12,7 +12,7 @@ import java.util.List;
 
 
 @Repository // indicates this is a DAO
-public class CardsRepo {
+public class DecklistsRepo {
 
     public JdbcTemplate getJdbcTemplate() {
         return jdbcTemplate;
@@ -27,7 +27,7 @@ public class CardsRepo {
 
     public void save(Decklists decklists){
 
-        String sqlInsert = "INSERT INTO cards (decklist_id, card_id, card_copies) VALUES (?, ?, ?);";
+        String sqlInsert = "INSERT INTO rohkeymon_decklists (decklist_id, card_id, card_copies) VALUES (?, ?, ?) ON DUPLICATE KEY UPDATE card_copies = LEAST(card_copies + 1, 4);";
 
         
 
@@ -37,7 +37,7 @@ public class CardsRepo {
 
     public List<Decklists> findAll(){
         RowMapper<Decklists> rm = new BeanPropertyRowMapper<>(Decklists.class);
-        String sql = "SELECT * from cards;";
+        String sql = "SELECT * from rohkeymon_decklists;";
         List<Decklists> alldata;
         alldata = this.jdbcTemplate.query(sql, rm);
         return alldata;
@@ -45,7 +45,7 @@ public class CardsRepo {
 
     public List<Decklists> decklistQuery(){
         RowMapper<Decklists> rm = new BeanPropertyRowMapper<>(Decklists.class);
-        String sql = "SELECT * FROM cards WHERE decklist_id = '44764e09-bf3d-11f0-a784-d8bbc1d9bfc1';";
+        String sql = "SELECT * FROM rohkeymon_decklists WHERE decklist_id = '44764e09-bf3d-11f0-a784-d8bbc1d9bfc1';";
         List<Decklists> decklistQueryResult;
         decklistQueryResult = this.jdbcTemplate.query(sql, rm);
         return decklistQueryResult;

@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Scope("prototype")
-public class Cards {
+public class Decklists {
     //private String decklist_order;
     private String decklist_id;
     private String card_id;
@@ -52,6 +52,6 @@ public class Cards {
                 '}';
     }
 
-    public void add(Cards cards) {
+    public void add(Decklists decklists) {
     }
 }
