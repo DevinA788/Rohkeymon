@@ -93,12 +93,12 @@ window.addEventListener("load", async function() {
 
   initializeDecklistTab();
 
-  data = await getDecklist(); //This fetch gets decklist card objects from API
+  decklist = await getDecklist(); //This fetch gets decklist card objects from API
 
   //TODO: figure out how to get decklist to show contents without needing to refresh page. 
 
   const cards = await Promise.all(
-    data.map(async (card) => {
+    decklist.map(async (card) => {
       const cardName = await getName(card.card_id);
       return {
         ...card, //Instead of returning properties manually, allows new properties to be added later on
