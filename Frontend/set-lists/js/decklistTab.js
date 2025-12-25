@@ -34,15 +34,24 @@ function buildDecklistTab(cards) {
     copiesDiv.className = "copies";
     copiesDiv.innerText = card_copies;
 
-    const addToDeck = document.createElement("BUTTON")
-    addToDeck.innerText = '+'
-    addToDeck.className='add-to-deck'
+    const addToDeck = document.createElement("BUTTON");
+    addToDeck.innerText = '+';
+    addToDeck.className = 'add-to-deck';
     addToDeck.id = card_id;
-    /*addToDeck.addEventListener("click", async (event)=> {
-      await incrementCopies(addToDeck.id)
-      alert(`Added base-1, card #${addToDeck.id} to deck.`)
-      //addingToDecklistTab(event.target.id)
-    })*/
+    addToDeck.addEventListener("click", async (event)=> {
+      await addingToDeck(addToDeck.id)
+      alert(`Adding base-1, card #${addToDeck.id} to deck.`)
+    });
+
+    const removeFromDeck = document.createElement("BUTTON");
+    removeFromDeck.innerText = '-';
+    removeFromDeck.className = 'remove-from-deck';
+    removeFromDeck.id = card_id;
+    removeFromDeck.addEventListener("click", async (event)=> {
+      await removingFromDeck(removeFromDeck.id)
+      alert(`Removing base-1, card #${removeFromDeck.id} from deck.`)
+
+    })
 
     /*const removeFromDeck = document.createElement("BUTTON")
     removeFromDeck.innerText = '-'
@@ -113,19 +122,41 @@ window.addEventListener("load", async function() {
   //TODO: click handlers - reenable addToDeck button 
 });
 
-//TODO: decklist tab addToDeck button, different from set-list add to deck button. currently this is appending a new card object to the end of the decklist. All we want here is to increase quantity.
-/*async function incrementCopies(id) {
-  document.getElementById(id).disabled = true
-  
+async function removingFromDeck(cardId) {
+  let decklistId = "44764e09-bf3d-11f0-a784-d8bbc1d9bfc1"; 
+  document.getElementById(cardId).disabled = true
+  if (!decklist[decklistId]) { // see if id's  in deck, init if not 
+    decklist[decklistId] = {};
+  } 
+  if (!decklist[decklistId][cardId]) {
+    decklist[decklistId][cardId] = {count: 0}; 
+  }
+
+  decklist[decklistId][cardId].count = decklist[decklistId][cardId].count + 1
   const response = await fetch("http://localhost:8080/api/add-to-deck", {
     method: "POST",
     headers: {"Content-Type": "application/json",},
     body: JSON.stringify({
-      card_copies: "1",
+      decklist_id: decklistId,
+      card_id: cardId,
+      card_copies: decklist[decklistId][cardId].count
     }),
-  })
+  }) 
+  if (response.ok) {
+    const data = await response.json();
+    if (data.card_copies >=4) {
+      //document.getElementById(cardId).disabled = true
+      alert("Maximum copies of card added to deck")
+    }
+    //rebuild decklist here if worked. if not, else: decrement card count 
+  } else {
+    decklist[decklistId][cardId].count -= 1;
+  }
+  
+    document.getElementById(cardId).disabled = false
+}
+
   
   
-    document.getElementById(id).disabled = false
+
   
-}*/

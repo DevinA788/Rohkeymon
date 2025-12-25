@@ -14,7 +14,7 @@ window.addEventListener('load', function() {
         removeFromDeck.className='remove-from-deck'
         
         addToDeck.addEventListener("click", async (event)=> {
-          alert(`Adding base-1, card #${addToDeck.id} to deck.`)
+          alert(`Attempting to add base-1, card #${addToDeck.id} to deck...`)
           await addingToDeck(addToDeck.id)
           
           //addingToDecklistTab(event.target.id)
@@ -40,6 +40,11 @@ async function addingToDeck(cardId) {
   if (!decklist[decklistId][cardId]) {
     decklist[decklistId][cardId] = {count: 0}; 
   }
+  /*if (decklist[decklistId][cardId] = {count: 4}) {
+    alert("Maximum copies of card added to deck")
+    return;
+  }*/
+
   decklist[decklistId][cardId].count = decklist[decklistId][cardId].count + 1
   const response = await fetch("http://localhost:8080/api/add-to-deck", {
     method: "POST",
@@ -60,8 +65,6 @@ async function addingToDeck(cardId) {
   } else {
     decklist[decklistId][cardId].count -= 1;
   }
-  
-  
   
     document.getElementById(cardId).disabled = false
 }
