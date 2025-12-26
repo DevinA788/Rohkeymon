@@ -56,8 +56,8 @@ async function addingToDeck(cardId) {
     }),
   }) 
   if (response.ok) {
-    const data = await response.json();
-    if (data.card_copies >=4) {
+    const decklist = await response.json();
+    if (decklist.card_copies >=4) {
       //document.getElementById(cardId).disabled = true
       alert("Maximum copies of card added to deck")
     }

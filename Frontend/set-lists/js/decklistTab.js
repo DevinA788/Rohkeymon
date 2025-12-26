@@ -52,16 +52,11 @@ function buildDecklistTab(cards) {
       alert(`Removing base-1, card #${removeFromDeck.id} from deck.`)
 
     })
-
-    /*const removeFromDeck = document.createElement("BUTTON")
-    removeFromDeck.innerText = '-'
-    removeFromDeck.className='remove-from-deck'
-    removeFromDeck.id = card_id;*/
     
     pokemonCard.appendChild(nameDiv);
     pokemonCard.appendChild(copiesDiv);
     pokemonCard.appendChild(addToDeck);
-    //pokemonCard.appendChild(removeFromDeck);
+    pokemonCard.appendChild(removeFromDeck);
     return pokemonCard;
   });
 }
@@ -80,8 +75,6 @@ async function getDecklist() {
     console.error('Error:', error);
   }
 }
-
-
 
 function initializeDecklistTab() {
   let decklistButton = document.querySelector('.decklistButton');
@@ -124,15 +117,12 @@ window.addEventListener("load", async function() {
 
 async function removingFromDeck(cardId) {
   let decklistId = "44764e09-bf3d-11f0-a784-d8bbc1d9bfc1"; 
-  document.getElementById(cardId).disabled = true
-  if (!decklist[decklistId]) { // see if id's  in deck, init if not 
-    decklist[decklistId] = {};
-  } 
-  if (!decklist[decklistId][cardId]) {
-    decklist[decklistId][cardId] = {count: 0}; 
-  }
 
-  decklist[decklistId][cardId].count = decklist[decklistId][cardId].count + 1
+    console.log("decklist:", decklist);
+  console.log("decklist[decklistId]:", decklist[decklistId]);
+  console.log("cardId:", cardId);
+
+  decklist[decklistId][cardId].count = decklist[decklistId][cardId].count - 1
   const response = await fetch("http://localhost:8080/api/add-to-deck", {
     method: "POST",
     headers: {"Content-Type": "application/json",},
@@ -143,18 +133,15 @@ async function removingFromDeck(cardId) {
     }),
   }) 
   if (response.ok) {
-    const data = await response.json();
-    if (data.card_copies >=4) {
-      //document.getElementById(cardId).disabled = true
-      alert("Maximum copies of card added to deck")
+    const decklist = await response.json();
+    if (decklist.card_copies = 0) {
+      pokemonCard.remove();
     }
     //rebuild decklist here if worked. if not, else: decrement card count 
   } else {
-    decklist[decklistId][cardId].count -= 1;
+    decklist[decklistId][cardId].count += 1;
   }
-  
-    document.getElementById(cardId).disabled = false
-}
+};
 
   
   

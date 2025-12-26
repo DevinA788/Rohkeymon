@@ -1,5 +1,6 @@
 .set-header {
-  background-image: url("templates/stardust.png");
+  /*(background-image: url("templates/stardust.png");*/
+  background-color: black;
   height: 25px;
   margin-top: 75px;
   text-align: center;
@@ -51,6 +52,7 @@
   margin: auto;
   padding: 0;
   border: none;
+  border: black;
 }
 
 .add-to-deck disabled {
@@ -67,4 +69,3 @@
   padding: 0;
   border: none;
 }
-
