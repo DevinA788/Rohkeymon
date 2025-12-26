@@ -40,7 +40,7 @@ function buildDecklistTab(cards) {
     addToDeck.id = card_id;
     addToDeck.addEventListener("click", async (event)=> {
       await addingToDeck(addToDeck.id)
-      alert(`Adding base-1, card #${addToDeck.id} to deck.`)
+      alert(`Adding card ${addToDeck.id} to deck.`)
     });
 
     const removeFromDeck = document.createElement("BUTTON");
@@ -49,7 +49,7 @@ function buildDecklistTab(cards) {
     removeFromDeck.id = card_id;
     removeFromDeck.addEventListener("click", async (event)=> {
       await removingFromDeck(removeFromDeck.id)
-      alert(`Removing base-1, card #${removeFromDeck.id} from deck.`)
+      alert(`Removing card ${removeFromDeck.id} from deck.`)
 
     })
     
@@ -118,7 +118,10 @@ window.addEventListener("load", async function() {
 async function removingFromDeck(cardId) {
   let decklistId = "44764e09-bf3d-11f0-a784-d8bbc1d9bfc1"; 
 
-    console.log("decklist:", decklist);
+  if (decklist[decklistId]) { 
+    decklist[decklistId] = {};
+  }
+  console.log("decklist:", decklist);
   console.log("decklist[decklistId]:", decklist[decklistId]);
   console.log("cardId:", cardId);
 

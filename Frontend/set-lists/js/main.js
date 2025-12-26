@@ -2,6 +2,7 @@ const BASE_SET_ONE_UNIQUES = 102
 var cardId = 0
 let decklist = {}
 let count = 0
+
 window.addEventListener('load', function() { 
   const setList=document.getElementById("cardgrid")
     for (cardId; cardId < BASE_SET_ONE_UNIQUES; cardId++){
@@ -14,7 +15,7 @@ window.addEventListener('load', function() {
         removeFromDeck.className='remove-from-deck'
         
         addToDeck.addEventListener("click", async (event)=> {
-          alert(`Attempting to add base-1, card #${addToDeck.id} to deck...`)
+          alert(`Attempting to add card ${addToDeck.id} to deck...`)
           await addingToDeck(addToDeck.id)
           
           //addingToDecklistTab(event.target.id)
@@ -44,6 +45,11 @@ async function addingToDeck(cardId) {
     alert("Maximum copies of card added to deck")
     return;
   }*/
+    console.log("decklist:", decklist);
+    console.log("decklist[decklistId]:", decklist[decklistId]);
+    console.log("cardId:", cardId);
+  
+
 
   decklist[decklistId][cardId].count = decklist[decklistId][cardId].count + 1
   const response = await fetch("http://localhost:8080/api/add-to-deck", {
