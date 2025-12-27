@@ -41,17 +41,17 @@ async function addingToDeck(cardId) {
   if (!decklist[decklistId][cardId]) {
     decklist[decklistId][cardId] = {count: 0}; 
   }
-  /*if (decklist[decklistId][cardId] = {count: 4}) {
-    alert("Maximum copies of card added to deck")
+  decklist[decklistId][cardId].count += 1;
+  console.log(decklist[decklistId][cardId].count);
+  if (decklist[decklistId][cardId].count >= 4) {
+    alert("1st Maximum copies of card added to deck")
+    decklist[decklistId][cardId].count -= 1;
     return;
-  }*/
+  }
     console.log("decklist:", decklist);
     console.log("decklist[decklistId]:", decklist[decklistId]);
     console.log("cardId:", cardId);
-  
-
-
-  decklist[decklistId][cardId].count = decklist[decklistId][cardId].count + 1
+    
   const response = await fetch("http://localhost:8080/api/add-to-deck", {
     method: "POST",
     headers: {"Content-Type": "application/json",},
@@ -65,7 +65,7 @@ async function addingToDeck(cardId) {
     const decklist = await response.json();
     if (decklist.card_copies >=4) {
       //document.getElementById(cardId).disabled = true
-      alert("Maximum copies of card added to deck")
+      //alert(decklist?.message?decklist.message:"Unknown Error.") Ternary operator
     }
     //rebuild decklist here if worked. if not, else: decrement card count 
   } else {

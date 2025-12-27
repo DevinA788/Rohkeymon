@@ -46,6 +46,7 @@ public class MainController {
     public Decklists save(@RequestBody Decklists decklists) {
        decklistsRepo.save(decklists);
         return decklists;
+        //if card copies >=4, send message saying max has been reached.
 
     }
         //String card_id = body.get("card_id");
