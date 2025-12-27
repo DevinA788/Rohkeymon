@@ -118,14 +118,23 @@ window.addEventListener("load", async function() {
 async function removingFromDeck(cardId) {
   let decklistId = "44764e09-bf3d-11f0-a784-d8bbc1d9bfc1"; 
 
-  if (decklist[decklistId]) { 
+  console.log("decklist:", decklist);
+  console.log("decklist[decklistId]:", decklist[0]);
+  console.log("cardId:", cardId);
+  if (!decklist[decklistId]) { // see if id's  in deck, init if not 
     decklist[decklistId] = {};
   }
-  console.log("decklist:", decklist);
-  console.log("decklist[decklistId]:", decklist[decklistId]);
-  console.log("cardId:", cardId);
+
+  if (!decklist[decklistId]) { 
+    decklist[decklistId][cardId] = {count: 0}; //If no decklist exists, initialize object values
+  }
+ 
 
   decklist[decklistId][cardId].count = decklist[decklistId][cardId].count - 1
+  if (decklist[decklistId][cardId].count < 0) {
+    decklist[decklistId][cardId].count += 1;
+    return;
+  }
   const response = await fetch("http://localhost:8080/api/add-to-deck", {
     method: "POST",
     headers: {"Content-Type": "application/json",},
@@ -137,7 +146,7 @@ async function removingFromDeck(cardId) {
   }) 
   if (response.ok) {
     const decklist = await response.json();
-    if (decklist.card_copies = 0) {
+    if (decklist.card_copies == 0) {
       pokemonCard.remove();
     }
     //rebuild decklist here if worked. if not, else: decrement card count 
