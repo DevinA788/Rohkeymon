@@ -1,0 +1,1 @@
+INSERT INTO rohkeymon_decklists (decklist_id, card_id, card_copies) VALUES ("44764e09-bf3d-11f0-a784-d8bbc1d9bfc1", "base1-6", 2);

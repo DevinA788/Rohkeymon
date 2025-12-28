@@ -1,18 +1,15 @@
 package com.rohkeymon.SpringBootAPI.MainController;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import com.rohkeymon.SpringBootAPI.model.Cards;
-import com.rohkeymon.SpringBootAPI.repo.CardsRepo;
+import com.rohkeymon.SpringBootAPI.model.Decklists;
+import com.rohkeymon.SpringBootAPI.repo.DecklistsRepo;
 
 @RestController
 @RequestMapping(
@@ -25,7 +22,7 @@ public class MainController {
     JdbcTemplate jdbcTemplate;
 
     @Autowired
-    CardsRepo cardsRepo;
+    DecklistsRepo decklistsRepo;
 
     @GetMapping(
             path = {"test"}
@@ -35,14 +32,32 @@ public class MainController {
     }
 
     @GetMapping({"alldata"})
-    List<Cards> alldata() {
-        return cardsRepo.findAll();
+    List<Decklists> alldata() {
+        return decklistsRepo.findAll();
+    }
+
+    @GetMapping({"decklist"})
+    List<Decklists> decklistQueryResult() {return decklistsRepo.decklistQuery();}
+
+    @GetMapping("/decklist/{decklistId}/cards-map")
+    public Map<String, Object> getDecklistAsMap(@PathVariable String decklistId) {
+        List<Decklists> cards = decklistsRepo.findByDecklistId(decklistId);
+
+        // Transform list to nested object structure
+        Map<String, Object> result = new HashMap<>();
+        for (Decklists card : cards) {
+            Map<String, Integer> cardData = new HashMap<>();
+            cardData.put("count", card.getCard_copies());
+            result.put(card.getCard_id(), cardData);
+        }
+
+        return result;  // Returns: {"base1-6": {"count": 3}, "base1-4": {"count": 2}}
     }
 
     @PostMapping("add-to-deck")
-    public Cards save(@RequestBody Cards cards) {
-       cardsRepo.save(cards);
-        return cards;
+    public Decklists save(@RequestBody Decklists decklists) {
+       return decklistsRepo.save(decklists);
+        //if card copies >=4, send message saying max has been reached.
 
     }
         //String card_id = body.get("card_id");

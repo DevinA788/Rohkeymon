@@ -5,11 +5,11 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Scope("prototype")
-public class Cards {
+public class Decklists {
     //private String decklist_order;
     private String decklist_id;
     private String card_id;
-    private String card_copies;
+    private Integer card_copies;
 
     /*public String getDecklist_order() {
         return this.decklist_order;
@@ -35,11 +35,11 @@ public class Cards {
         this.card_id = card_id;
     }
 
-    public String getCard_copies() {
+    public Integer getCard_copies() {
         return this.card_copies;
     }
 
-    public void setCard_copies(String card_copies) {
+    public void setCard_copies(Integer card_copies) {
         this.card_copies = card_copies;
     }
 
@@ -52,6 +52,6 @@ public class Cards {
                 '}';
     }
 
-    public void add(Cards cards) {
+    public void add(Decklists decklists) {
     }
 }

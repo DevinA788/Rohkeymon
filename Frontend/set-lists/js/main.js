@@ -1,48 +1,92 @@
 const BASE_SET_ONE_UNIQUES = 102
 var cardId = 0
+let decklist = {}
+let count = 0
+let decklistId = "44764e09-bf3d-11f0-a784-d8bbc1d9bfc1";
 
-window.addEventListener('load', function() { 
+window.addEventListener('load', async function() { 
+  await loadDecklist(decklistId);
   const setList=document.getElementById("cardgrid")
     for (cardId; cardId < BASE_SET_ONE_UNIQUES; cardId++){
         const card=document.createElement("div")
-        const img=document.createElement("img")
         const addToDeck=document.createElement("BUTTON")
+        const img=document.createElement("img")
         addToDeck.className='add-to-deck'
-        addToDeck.id = cardId + 1  
+        addToDeck.id = `base1-${cardId + 1}`
         const removeFromDeck=document.createElement("BUTTON")
         removeFromDeck.className='remove-from-deck'
-        addToDeck.innerText = '+'
+        
         addToDeck.addEventListener("click", async (event)=> {
-          await addingToDeck(event.target.id)
-          //alert(`Added base-1, card# ${event.target.id} to deck.`)
+          alert(`Attempting to add card ${addToDeck.id} to deck...`)
+          await addingToDeck(addToDeck.id)
+          
+          //addingToDecklistTab(event.target.id)
         })
         removeFromDeck.innerText = '-'
         img.src=`https://images.pokemontcg.io/base1/${cardId+1}.png`
-
-        card.className="card-item"
-        card.appendChild(addToDeck)
-        card.appendChild(removeFromDeck)
-        card.appendChild(img)
         setList.appendChild(card)
+        card.className="card-item"
+        addToDeck.appendChild(img)
+        card.appendChild(addToDeck)
+        
+        
       }
     // NOTE: innerText for variables.
 });
 
-async function addingToDeck(id) {
-  document.getElementById(event.target.id).disabled = true
+async function loadDecklist(decklistId) {
+  const response = await fetch(`http://localhost:8080/api/decklist/${decklistId}/cards-map`);
+  const cardsMap = await response.json();
   
-  const response = await fetch("http://localhost:8080/Rohkeymon/add-to-deck", {
+  // Populate the global decklist object
+  decklist[decklistId] = cardsMap;
+  // Now decklist is: {"44764e09...": {"base1-6": {count: 3}, "base1-4": {count: 2}}}
+}
+
+async function addingToDeck(cardId) {
+  let decklistId = "44764e09-bf3d-11f0-a784-d8bbc1d9bfc1"; //pass in as arg on 32 from dropdown
+  document.getElementById(cardId).disabled = true
+  if (!decklist[decklistId]) { // see if id's  in deck, init if not 
+    decklist[decklistId] = {};
+  } 
+  if (!decklist[decklistId][cardId]) {
+    decklist[decklistId][cardId] = {count: 0}; 
+  }
+  decklist[decklistId][cardId].count += 1;
+  console.log(decklist[decklistId][cardId].count);
+  /*if (decklist[decklistId][cardId].count >= 4) {
+    alert("1st Maximum copies of card added to deck")
+    decklist[decklistId][cardId].count -= 1;
+    return;
+  }*/
+    console.log("decklist:", decklist);
+    console.log("decklist[decklistId]:", decklist[decklistId]);
+    console.log("cardId:", cardId);
+    
+  const response = await fetch("http://localhost:8080/api/add-to-deck", {
     method: "POST",
     headers: {"Content-Type": "application/json",},
     body: JSON.stringify({
-      card_copies: "1",
-      card_id: `base1-${id}`,
-      decklist_id: "44764e09-bf3d-11f0-a784-d8bbc1d9bfc1"
+      decklist_id: decklistId,
+      card_id: cardId,
+      card_copies: 1
     }),
-  })
+  }) 
+  if (response.ok) {
+    const updatedCard = await response.json();
+    console.log("Updated card:", updatedCard);
+    decklist[decklistId][cardId].count = parseInt(updatedCard.card_copies);
+    if (updatedCard.card_copies >=4) {
+      //document.getElementById(cardId).disabled = true
+      alert("Maximum copies reached");
+      //alert(decklist?.message?decklist.message:"Unknown Error.") Ternary operator
+    }
+    //rebuild decklist here if worked. if not, else: decrement card count 
+  } else {
+    decklist[decklistId][cardId].count -= 1;
+  }
   
-  setTimeout(() => {
-    document.getElementById(id).disabled = false
-  }, 500)
+    document.getElementById(cardId).disabled = false
 }
+
 

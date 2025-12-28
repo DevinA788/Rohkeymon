@@ -1,5 +1,6 @@
 .set-header {
-  background-image: url("templates/stardust.png");
+  /*(background-image: url("templates/stardust.png");*/
+  background-color: black;
   height: 25px;
   margin-top: 75px;
   text-align: center;
@@ -43,22 +44,28 @@
 }
 
 .add-to-deck {
-  position: absolute;
-  height: 25px;
-  width: 25px;
-  margin-left: 75px;
-  margin-top: 48px;
+  width: 100%;
+  max-width: 25vw;
+  height: auto;
+  display: block;
+  object-fit: contain;
+  margin: auto;
+  padding: 0;
+  border: none;
+  border: black;
 }
 
 .add-to-deck disabled {
-  color: gray;
+  opacity: hidden;
 }
 
 .remove-from-deck {
-  position: absolute;
-  height: 25px;
-  width: 25px;
-  margin-left: 75px;
-  margin-top: 88px;
+  width: 100%;
+  max-width: 25vw;
+  height: auto;
+  display: block;
+  object-fit: contain;
+  margin: auto;
+  padding: 0;
+  border: none;
 }
-
