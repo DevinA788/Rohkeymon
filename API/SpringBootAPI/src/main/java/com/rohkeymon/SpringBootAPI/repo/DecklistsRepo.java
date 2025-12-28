@@ -25,13 +25,20 @@ public class DecklistsRepo {
 
     private JdbcTemplate jdbcTemplate;
 
-    public void save(Decklists decklists){
+    public Decklists save(Decklists decklists){
 
-        String sqlInsert = "INSERT INTO rohkeymon_decklists (decklist_id, card_id, card_copies) VALUES (?, ?, ?) ON DUPLICATE KEY UPDATE card_copies = LEAST(card_copies + 1, 4);";
+        String sqlInsert = "INSERT INTO rohkeymon_decklists (decklist_id, card_id, card_copies) VALUES (?, ?, 1) ON DUPLICATE KEY UPDATE card_copies = LEAST(card_copies + 1, 4);";
 
         
 
-        jdbcTemplate.update(sqlInsert, decklists.getDecklist_id(), decklists.getCard_id(), decklists.getCard_copies());
+        jdbcTemplate.update(sqlInsert, decklists.getDecklist_id(), decklists.getCard_id());
+
+        String sqlSelect = "SELECT * FROM rohkeymon_decklists WHERE decklist_id = ? AND card_id = ?";
+        RowMapper<Decklists> rm = new BeanPropertyRowMapper<>(Decklists.class);
+
+        return jdbcTemplate.queryForObject(sqlSelect, rm,
+                decklists.getDecklist_id(),
+                decklists.getCard_id());
 
     }
 
@@ -49,5 +56,11 @@ public class DecklistsRepo {
         List<Decklists> decklistQueryResult;
         decklistQueryResult = this.jdbcTemplate.query(sql, rm);
         return decklistQueryResult;
+    }
+
+    public List<Decklists> findByDecklistId(String decklistId) {
+        String sql = "SELECT * FROM rohkeymon_decklists WHERE decklist_id = ?";
+        RowMapper<Decklists> rm = new BeanPropertyRowMapper<>(Decklists.class);
+        return jdbcTemplate.query(sql, rm, decklistId);
     }
 }

@@ -2,8 +2,10 @@ const BASE_SET_ONE_UNIQUES = 102
 var cardId = 0
 let decklist = {}
 let count = 0
+let decklistId = "44764e09-bf3d-11f0-a784-d8bbc1d9bfc1";
 
-window.addEventListener('load', function() { 
+window.addEventListener('load', async function() { 
+  await loadDecklist(decklistId);
   const setList=document.getElementById("cardgrid")
     for (cardId; cardId < BASE_SET_ONE_UNIQUES; cardId++){
         const card=document.createElement("div")
@@ -32,6 +34,15 @@ window.addEventListener('load', function() {
     // NOTE: innerText for variables.
 });
 
+async function loadDecklist(decklistId) {
+  const response = await fetch(`http://localhost:8080/api/decklist/${decklistId}/cards-map`);
+  const cardsMap = await response.json();
+  
+  // Populate the global decklist object
+  decklist[decklistId] = cardsMap;
+  // Now decklist is: {"44764e09...": {"base1-6": {count: 3}, "base1-4": {count: 2}}}
+}
+
 async function addingToDeck(cardId) {
   let decklistId = "44764e09-bf3d-11f0-a784-d8bbc1d9bfc1"; //pass in as arg on 32 from dropdown
   document.getElementById(cardId).disabled = true
@@ -43,11 +54,11 @@ async function addingToDeck(cardId) {
   }
   decklist[decklistId][cardId].count += 1;
   console.log(decklist[decklistId][cardId].count);
-  if (decklist[decklistId][cardId].count >= 4) {
+  /*if (decklist[decklistId][cardId].count >= 4) {
     alert("1st Maximum copies of card added to deck")
     decklist[decklistId][cardId].count -= 1;
     return;
-  }
+  }*/
     console.log("decklist:", decklist);
     console.log("decklist[decklistId]:", decklist[decklistId]);
     console.log("cardId:", cardId);
@@ -58,13 +69,16 @@ async function addingToDeck(cardId) {
     body: JSON.stringify({
       decklist_id: decklistId,
       card_id: cardId,
-      card_copies: decklist[decklistId][cardId].count
+      card_copies: 1
     }),
   }) 
   if (response.ok) {
-    const decklist = await response.json();
-    if (decklist.card_copies >=4) {
+    const updatedCard = await response.json();
+    console.log("Updated card:", updatedCard);
+    decklist[decklistId][cardId].count = parseInt(updatedCard.card_copies);
+    if (updatedCard.card_copies >=4) {
       //document.getElementById(cardId).disabled = true
+      alert("Maximum copies reached");
       //alert(decklist?.message?decklist.message:"Unknown Error.") Ternary operator
     }
     //rebuild decklist here if worked. if not, else: decrement card count 
