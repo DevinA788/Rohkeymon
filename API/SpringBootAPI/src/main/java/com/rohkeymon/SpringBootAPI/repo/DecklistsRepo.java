@@ -27,11 +27,24 @@ public class DecklistsRepo {
 
     public Decklists save(Decklists decklists){
 
-        String sqlInsert = "INSERT INTO rohkeymon_decklists (decklist_id, card_id, card_copies) VALUES (?, ?, 1) ON DUPLICATE KEY UPDATE card_copies = LEAST(card_copies + 1, 4);";
+        String sqlIncrement = "INSERT INTO rohkeymon_decklists (decklist_id, card_id, card_copies) VALUES (?, ?, 1) ON DUPLICATE KEY UPDATE card_copies = LEAST(card_copies + 1, 4);";
 
-        
+        jdbcTemplate.update(sqlIncrement, decklists.getDecklist_id(), decklists.getCard_id());
 
-        jdbcTemplate.update(sqlInsert, decklists.getDecklist_id(), decklists.getCard_id());
+        String sqlSelect = "SELECT * FROM rohkeymon_decklists WHERE decklist_id = ? AND card_id = ?";
+        RowMapper<Decklists> rm = new BeanPropertyRowMapper<>(Decklists.class);
+
+        return jdbcTemplate.queryForObject(sqlSelect, rm,
+                decklists.getDecklist_id(),
+                decklists.getCard_id());
+
+    }
+
+    public Decklists decrement(Decklists decklists){
+
+        String sqlDecrement = "INSERT INTO rohkeymon_decklists (decklist_id, card_id, card_copies) VALUES (?, ?, 1) ON DUPLICATE KEY UPDATE card_copies = card_copies - 1;"; //Think about this...
+
+        jdbcTemplate.update(sqlDecrement, decklists.getDecklist_id(), decklists.getCard_id());
 
         String sqlSelect = "SELECT * FROM rohkeymon_decklists WHERE decklist_id = ? AND card_id = ?";
         RowMapper<Decklists> rm = new BeanPropertyRowMapper<>(Decklists.class);
