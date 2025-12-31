@@ -63,5 +63,10 @@ public class MainController {
         //String card_id = body.get("card_id");
         //Cards cards = new Cards(card_id);*/
 
+    @PatchMapping("decrement-copies")
+    public Decklists decrement(@RequestBody Decklists decklists) {
+        return decklistsRepo.decrement(decklists);
+    }
+
 }
 
