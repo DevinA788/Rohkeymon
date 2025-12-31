@@ -42,7 +42,7 @@ public class DecklistsRepo {
 
     public Decklists decrement(Decklists decklists){
 
-        String sqlDecrement = "INSERT INTO rohkeymon_decklists (decklist_id, card_id, card_copies) VALUES (?, ?, 1) ON DUPLICATE KEY UPDATE card_copies = card_copies - 1;"; //Think about this...
+        String sqlDecrement = "INSERT INTO rohkeymon_decklists (decklist_id, card_id, card_copies) VALUES (?, ?, 1) ON DUPLICATE KEY UPDATE card_copies = GREATEST(card_copies - 1, 0);"; //Think about this...
 
         jdbcTemplate.update(sqlDecrement, decklists.getDecklist_id(), decklists.getCard_id());
 
