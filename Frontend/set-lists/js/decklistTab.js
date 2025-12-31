@@ -116,30 +116,30 @@ window.addEventListener("load", async function() {
 });
 
 async function removingFromDeck(cardId) {
-  if (!decklist[decklistId]) { // see if id's  in deck, init if not 
+  if (!decklist[decklistId]) { // see if id's in deck, init if not 
     decklist[decklistId] = {};
   }
   if (!decklist[decklistId]) { 
     decklist[decklistId][cardId] = {count: 0}; //If no decklist exists, initialize object values
   }
-  if (decklist[decklistId][cardId].count == 0) { //If out of copies, exit function and run function with HTTP DELETE. 
+  /*if (decklist[decklistId][cardId].count == 0) { //TODO: If out of copies, exit function and run function with HTTP DELETE. 
     console.log("Count is 0, running deleteZeroCopies");
     return;
-  }
+  }*/
 
-  decklist[decklistId][cardId].count = decklist[decklistId][cardId].count - 1
-  if (decklist[decklistId][cardId].count < 0) {
-    decklist[decklistId][cardId].count += 1;
+  decklist[decklistId][cardId].count = decklist[decklistId][cardId].count - 1;
+  if (decklist[decklistId][cardId].count < 0) { //If somehow count is negative, set to 0.
+    decklist[decklistId][cardId].count == 0;
     return;
   }
   console.log(decklist[decklistId][cardId].count);
-  const response = await fetch("http://localhost:8080/api/add-to-deck", {
-    method: "POST",
+  const response = await fetch("http://localhost:8080/api/decrement-copies", {
+    method: "PATCH",
     headers: {"Content-Type": "application/json",},
     body: JSON.stringify({
       decklist_id: decklistId,
       card_id: cardId,
-      card_copies: decklist[decklistId][cardId].count
+      card_copies: 1 //hardcoded to let API handle decrementing
     }),
   }) 
   if (response.ok) {
