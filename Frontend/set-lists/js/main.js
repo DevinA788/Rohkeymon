@@ -44,9 +44,6 @@ async function loadDecklist(decklistId) {
 }
 
 async function addingToDeck(cardId) {
-  //let decklistId = "44764e09-bf3d-11f0-a784-d8bbc1d9bfc1"; //pass in as arg on 32 from dropdown
-  console.log(decklist[decklistId]);
-  console.log(decklist[decklistId][cardId].count);
   document.getElementById(cardId).disabled = true
   if (!decklist[decklistId]) { // see if id's  in deck, init if not 
     decklist[decklistId] = {};
