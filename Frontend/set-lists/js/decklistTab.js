@@ -119,7 +119,7 @@ async function removingFromDeck(cardId) {
   if (!decklist[decklistId]) { // see if id's in deck, init if not 
     decklist[decklistId] = {};
   }
-  if (!decklist[decklistId]) { 
+  if (!decklist[decklistId][cardId]) { 
     decklist[decklistId][cardId] = {count: 0}; //If no decklist exists, initialize object values
   }
   /*if (decklist[decklistId][cardId].count == 0) { //TODO: If out of copies, exit function and run function with HTTP DELETE. 
@@ -129,7 +129,7 @@ async function removingFromDeck(cardId) {
 
   decklist[decklistId][cardId].count = decklist[decklistId][cardId].count - 1;
   if (decklist[decklistId][cardId].count < 0) { //If somehow count is negative, set to 0.
-    decklist[decklistId][cardId].count == 0;
+    decklist[decklistId][cardId].count = 0;
     return;
   }
   console.log(decklist[decklistId][cardId].count);
