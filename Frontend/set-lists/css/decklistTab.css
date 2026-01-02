@@ -41,7 +41,7 @@
   visibility: visible;
 }
 
-.decklistTab .button .close{
+.decklistTab .button .close {
   background-color: red;
   color: white;
   border: none;
@@ -57,13 +57,15 @@
   grid-template-columns: 1fr 40px;
   border-color: red;
 }
+
 .decklistTab h1 {
   text-align: center;
   margin: 0;
+  color: rgb(168, 83, 168);
 }
 
 .decklist {
-  background-color: grey;
+  background-color: black;
   color: white;
   overflow-y: scroll;
   height: 80vh;
@@ -71,7 +73,89 @@
 
 .decklist .pokemonCard {
   display: grid;
-  grid-template-columns: 70px 150px 50px 50px;
-  background-color: grey;
+  grid-template-columns: 2fr 1fr .5fr 1fr 1fr;
+  background-color: black;
   color: white;
+  height: 30px;
+}
+
+.add-to-deck {
+  width: 25px;
+  max-width: 25vw;
+  height: auto;
+  display: block;
+  object-fit: contain;
+  margin: auto;
+  margin-right: 0;
+  padding: 0;
+  border: solid;
+  border-width: 2px;
+  border-radius: 15px;
+  border-color: rgb(0, 217, 133);
+  background: black;
+  color: rgb(0, 217, 133);
+}
+
+.add-to-deck disabled {
+  opacity: hidden;
+}
+
+.remove-from-deck {
+  width: 25px;
+  max-width: 25vw;
+  height: auto;
+  display: block;
+  object-fit: contain;
+  margin: auto;
+  margin-left: 0;
+  padding: 0;
+  border: solid;
+  border-width: 2px;
+  border-radius: 15px;
+  border-color: rgb(0, 217, 133);
+  background: black;
+  color: rgb(0, 217, 133);
+}
+
+.delete-from-deck {
+  width: 25px;
+  max-width: 25vw;
+  height: auto;
+  display: block;
+  object-fit: contain;
+  margin: auto;
+  padding: 0;
+
+}
+
+.delete-from-deck img {
+  height: 10px;
+}
+
+.name {
+  width: 100%;
+  max-width: 25vw;
+  height: auto;
+  display: block;
+  object-fit: contain;
+  text-align: center;
+  margin: auto;
+  padding: 0;
+  border: none;
+  background: black;
+  color: rgb(0, 217, 133);
+}
+
+.copies {
+  width: 100%;
+  max-width: 25vw;
+  height: auto;
+  display: block;
+  object-fit: contain;
+  margin: auto;
+  padding: 0;
+  border: none;
+  text-align: center;
+  background: black;
+  color: rgb(0, 217, 133);
 }
