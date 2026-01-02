@@ -42,8 +42,8 @@
 }
 
 .decklistTab .button .close {
-  background-color: red;
-  color: white;
+  background-color: black;
+  color: rgb(0, 217, 133);
   border: none;
   font-size: 20px;
   height: 100%;
