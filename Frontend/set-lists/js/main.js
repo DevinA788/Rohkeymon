@@ -11,7 +11,7 @@ window.addEventListener('load', async function() {
         const card=document.createElement("div")
         const addToDeck=document.createElement("BUTTON")
         const img=document.createElement("img")
-        addToDeck.className='add-to-deck'
+        addToDeck.className='grid-add-to-deck'
         addToDeck.id = `base1-${cardId + 1}`
         const removeFromDeck=document.createElement("BUTTON")
         removeFromDeck.className='remove-from-deck'
