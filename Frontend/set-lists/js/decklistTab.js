@@ -39,8 +39,8 @@ function buildDecklistTab(cards) {
     addToDeck.className = 'add-to-deck';
     addToDeck.id = card_id;
     addToDeck.addEventListener("click", async (event)=> {
-      await addingToDeck(addToDeck.id)
       alert(`Adding card ${addToDeck.id} to deck.`)
+      await addingToDeck(addToDeck.id)
     });
 
     const removeFromDeck = document.createElement("BUTTON");
@@ -48,8 +48,9 @@ function buildDecklistTab(cards) {
     removeFromDeck.className = 'remove-from-deck';
     removeFromDeck.id = card_id;
     removeFromDeck.addEventListener("click", async (event)=> {
-      await removingFromDeck(removeFromDeck.id)
       alert(`Removing card ${removeFromDeck.id} from deck.`)
+      await removingFromDeck(removeFromDeck.id)
+      
 
     })
 
@@ -58,6 +59,13 @@ function buildDecklistTab(cards) {
     deleteImg.src = "./assets/trashcan.png";
     deleteFromDeck.appendChild(deleteImg);
     deleteFromDeck.className = 'delete-from-deck';
+    deleteFromDeck.id = card_id;
+    deleteFromDeck.addEventListener("click", async (event)=> {
+      alert(`Deleting entry ${deleteFromDeck.id} from decklist.`)
+      await deletingFromDeck(deleteFromDeck.id)
+      
+
+    })
     
     pokemonCard.appendChild(nameDiv);
     pokemonCard.appendChild(addToDeck);
@@ -159,12 +167,24 @@ async function removingFromDeck(cardId) {
   }
 };
 
-async function deleteZeroCopies(cardId) {
-  console.log(decklist[decklistId][cardId].count);
-  if (decklist[decklistId][cardId].count == 0) {
-    console.log("yep, that's 0 alright")
+async function deletingFromDeck(cardId) {
+  //console.log(decklist[decklistId][cardId]);
+  if (!decklist[decklistId]) { // If wrong deck id, exit. 
+    return;
+  } 
+  console.log(cardId);
+  const response = await fetch("http://localhost:8080/api/delete-entry", {
+    method: "DELETE",
+    headers: {"Content-Type": "application/json",},
+    body: JSON.stringify({
+      decklist_id: decklistId,
+      card_id: cardId
+    }),
+  })
+  if (response.ok) {
+    console.log("Deleted entry successfully.");
   }
-}
+};
    
   
   
