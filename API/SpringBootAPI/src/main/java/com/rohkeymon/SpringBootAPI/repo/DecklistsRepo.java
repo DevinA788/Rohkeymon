@@ -76,4 +76,16 @@ public class DecklistsRepo {
         RowMapper<Decklists> rm = new BeanPropertyRowMapper<>(Decklists.class);
         return jdbcTemplate.query(sql, rm, decklistId);
     }
+
+    public Decklists deleteEntry(Decklists decklists) {
+
+        String sqlDelete = "DELETE FROM rohkeymon_decklists WHERE  decklist_id = ? and card_id = ?";
+
+        jdbcTemplate.update(sqlDelete, decklists.getDecklist_id(), decklists.getCard_id());
+
+        String sqlSelect = "SELECT * FROM rohkeymon_decklists WHERE decklist_id = ? AND card_id = ?";
+        RowMapper<Decklists> rm = new BeanPropertyRowMapper<>(Decklists.class);
+
+        return decklists;
+    }
 }

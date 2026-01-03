@@ -68,5 +68,9 @@ public class MainController {
         return decklistsRepo.decrement(decklists);
     }
 
+    @DeleteMapping("delete-entry")
+    public Decklists deleteEntry(@RequestBody Decklists decklists) {
+        return decklistsRepo.deleteEntry(decklists);
+    }
 }
 
