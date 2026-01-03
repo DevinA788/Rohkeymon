@@ -52,11 +52,18 @@ function buildDecklistTab(cards) {
       alert(`Removing card ${removeFromDeck.id} from deck.`)
 
     })
+
+    const deleteFromDeck = document.createElement("BUTTON");
+    const deleteImg = document.createElement("img");
+    deleteImg.src = "./assets/trashcan.png";
+    deleteFromDeck.appendChild(deleteImg);
+    deleteFromDeck.className = 'delete-from-deck';
     
     pokemonCard.appendChild(nameDiv);
-    pokemonCard.appendChild(copiesDiv);
     pokemonCard.appendChild(addToDeck);
+    pokemonCard.appendChild(copiesDiv);
     pokemonCard.appendChild(removeFromDeck);
+    pokemonCard.appendChild(deleteFromDeck);
     return pokemonCard;
   });
 }
@@ -90,7 +97,7 @@ function initializeDecklistTab() {
   });
 };
 
-export async function decklistTabPrimer() {
+async function decklistTabPrimer() {
   //TODO: click handlers - disable addToDeck button
 
   initializeDecklistTab();
