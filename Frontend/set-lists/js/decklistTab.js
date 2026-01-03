@@ -90,7 +90,7 @@ function initializeDecklistTab() {
   });
 };
 
-window.addEventListener("load", async function() {
+export async function decklistTabPrimer() {
   //TODO: click handlers - disable addToDeck button
 
   initializeDecklistTab();
@@ -113,7 +113,9 @@ window.addEventListener("load", async function() {
   document.querySelector(".decklist").append(...buildDecklistTab(cards));
 
   //TODO: click handlers - reenable addToDeck button 
-});
+};
+
+window.addEventListener("load", ()=>decklistTabPrimer())
 
 async function removingFromDeck(cardId) {
   if (!decklist[decklistId]) { // see if id's in deck, init if not 
