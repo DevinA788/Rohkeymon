@@ -1,4 +1,7 @@
-async function getName(card_id) {
+import {cardId, decklist, count, decklistId, addingToDeck, loadDecklist} from "./main.js";
+
+
+export async function getName(card_id) {
   try {
     const response = await fetch(`https://api.tcgdex.net/v2/en/cards/${card_id}`);
     if (response.ok) {
@@ -13,7 +16,7 @@ async function getName(card_id) {
   }
 }
 
-function buildDecklistTab(cards) { 
+export function buildDecklistTab(cards) { 
   /*
   Builds decklist of cards from array of card objects. 
   Card objects should have name and quantity. 
@@ -76,22 +79,27 @@ function buildDecklistTab(cards) {
   });
 }
 
-async function getDecklist() {
+export async function getDecklist(decklistId) {
   try {
-    const response = await fetch("http://localhost:8080/api/decklist");
+    const response = await fetch(`http://localhost:8080/api/decklist/${decklistId}/cards-map`);
     if (response.ok) {
-      const data = await response.json();
+      const cardsMap = await response.json();
       //console.log(data);
-      return data;
+      const decklistArray = Object.entries(cardsMap).map(([cardId, cardData]) => ({
+        card_id: cardId,
+        card_copies: cardData.count
+      }));
+      return decklistArray;
     } else {
       throw new Error('Failed to fetch decklist');
     }
   } catch (error) {
     console.error('Error:', error);
+    return [];
   }
 }
 
-function initializeDecklistTab() {
+export function initializeDecklistTab() {
   let decklistButton = document.querySelector('.decklistButton');
   let closeDecklist = document.querySelector('.close');
   let toggleContainer = document.querySelector('#decklistContainer');
@@ -105,17 +113,22 @@ function initializeDecklistTab() {
   });
 };
 
-async function decklistTabPrimer() {
+export async function decklistTabPrimer() {
   //TODO: click handlers - disable addToDeck button
 
   initializeDecklistTab();
 
-  decklist = await getDecklist(); //This fetch gets decklist card objects from API
+  const decklistArray = await getDecklist(decklistId); //This fetch gets decklist card objects from API
+
+  if (!decklistArray || !Array.isArray(decklistArray)) {
+    console.error('Decklist not loaded or wrong format loaded');
+    return;
+  }
 
   //TODO: figure out how to get decklist to show contents without needing to refresh page. 
 
   const cards = await Promise.all(
-    decklist.map(async (card) => {
+    decklistArray.map(async (card) => {
       const cardName = await getName(card.card_id);
       return {
         ...card, //Instead of returning properties manually, allows new properties to be added later on
@@ -132,7 +145,7 @@ async function decklistTabPrimer() {
 
 window.addEventListener("load", ()=>decklistTabPrimer())
 
-async function removingFromDeck(cardId) {
+export async function removingFromDeck(cardId) {
   console.log(cardId);
   
   if (!decklist[decklistId]) { // see if id's in deck, init if not 
@@ -162,14 +175,14 @@ async function removingFromDeck(cardId) {
     }),
   }) 
   if (response.ok) {
-    const decklist = await response.json();
+    const updatedDecklist = await response.json();
     //rebuild decklist here if worked. if not, else: decrement card count 
   } else {
     decklist[decklistId][cardId].count += 1;
   }
 };
 
-async function deletingFromDeck(cardId) {
+export async function deletingFromDeck(cardId) {
   //console.log(decklist[decklistId][cardId]);
   if (!decklist[decklistId]) { // If wrong deck id, exit. 
     return;
