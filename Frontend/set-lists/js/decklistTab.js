@@ -133,23 +133,25 @@ async function decklistTabPrimer() {
 window.addEventListener("load", ()=>decklistTabPrimer())
 
 async function removingFromDeck(cardId) {
+  console.log(cardId);
+  
   if (!decklist[decklistId]) { // see if id's in deck, init if not 
     decklist[decklistId] = {};
+  }
+  if (decklist[decklistId][cardId].count) {
+    console.log(decklist[decklistId][cardId].count + " (Before)");
   }
   if (!decklist[decklistId][cardId]) { 
     decklist[decklistId][cardId] = {count: 0}; //If no decklist exists, initialize object values
   }
-  /*if (decklist[decklistId][cardId].count == 0) { //TODO: If out of copies, exit function and run function with HTTP DELETE. 
-    console.log("Count is 0, running deleteZeroCopies");
-    return;
-  }*/
+  //console.log(decklist[decklistId][cardId].count + " (Before)");
 
   decklist[decklistId][cardId].count = decklist[decklistId][cardId].count - 1;
   if (decklist[decklistId][cardId].count < 0) { //If somehow count is negative, set to 0.
     decklist[decklistId][cardId].count = 0;
     return;
   }
-  console.log(decklist[decklistId][cardId].count);
+  console.log(decklist[decklistId][cardId].count + " (After)");
   const response = await fetch("http://localhost:8080/api/decrement-copies", {
     method: "PATCH",
     headers: {"Content-Type": "application/json",},
