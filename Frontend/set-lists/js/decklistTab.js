@@ -201,7 +201,27 @@ export async function deletingFromDeck(cardId) {
   }
 };
    
+export async function refreshDecklist() {
+  const decklistArray = await getDecklist(decklistId); //This fetch gets decklist card objects from API
+
+  if (!decklistArray || !Array.isArray(decklistArray)) {
+    console.error('Decklist not loaded or wrong format loaded');
+    return;
+  }
+
+  const cards = await Promise.all(
+    decklistArray.map(async (card) => {
+      const cardName = await getName(card.card_id);
+      return {
+        ...card, //Instead of returning properties manually, allows new properties to be added later on
+        card_name: cardName
+      };
+    })
+  );
+  console.log(cards);
   
+  document.querySelector(".pokemonCard").replaceWith(...buildDecklistTab(cards));
+};
   
 
   

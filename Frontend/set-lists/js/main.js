@@ -1,4 +1,4 @@
-import {buildDecklistTab, deletingFromDeck, decklistTabPrimer, removingFromDeck, initializeDecklistTab, getDecklist, getName} from "./decklistTab.js";
+import {buildDecklistTab, deletingFromDeck, decklistTabPrimer, removingFromDeck, initializeDecklistTab, getDecklist, getName, refreshDecklist} from "./decklistTab.js";
 
 
 
@@ -89,7 +89,8 @@ export async function addingToDeck(cardId) {
   } else {
     decklist[decklistId][cardId].count -= 1;
   }
-  
+    refreshDecklist();
+
     document.getElementById(cardId).disabled = false
 }
 
