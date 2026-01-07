@@ -21,7 +21,7 @@ window.addEventListener('load', async function() {
         removeFromDeck.className='remove-from-deck'
         
         addToDeck.addEventListener("click", async (event)=> {
-          alert(`Attempting to add card ${addToDeck.id} to deck...`)
+          //alert(`Attempting to add card ${addToDeck.id} to deck...`)
           await addingToDeck(addToDeck.id)
           
           //addingToDecklistTab(event.target.id)

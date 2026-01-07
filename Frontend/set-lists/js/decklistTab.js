@@ -42,7 +42,7 @@ export function buildDecklistTab(cards) {
     addToDeck.className = 'add-to-deck';
     addToDeck.id = card_id;
     addToDeck.addEventListener("click", async (event)=> {
-      alert(`Adding card ${addToDeck.id} to deck.`)
+      //alert(`Adding card ${addToDeck.id} to deck.`)
       await addingToDeck(addToDeck.id)
     });
 
@@ -51,7 +51,7 @@ export function buildDecklistTab(cards) {
     removeFromDeck.className = 'remove-from-deck';
     removeFromDeck.id = card_id;
     removeFromDeck.addEventListener("click", async (event)=> {
-      alert(`Removing card ${removeFromDeck.id} from deck.`)
+      //alert(`Removing card ${removeFromDeck.id} from deck.`)
       await removingFromDeck(removeFromDeck.id)
       
 
@@ -176,7 +176,6 @@ export async function removingFromDeck(cardId) {
   }) 
   if (response.ok) {
     const updatedDecklist = await response.json();
-    //rebuild decklist here if worked. if not, else: decrement card count 
   } else {
     decklist[decklistId][cardId].count += 1;
   }
