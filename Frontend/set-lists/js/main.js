@@ -91,7 +91,7 @@ export async function addingToDeck(cardId) {
   }
     refreshDecklist();
 
-    document.getElementById(cardId).disabled = false
+  document.getElementById(cardId).disabled = false
 }
 
 

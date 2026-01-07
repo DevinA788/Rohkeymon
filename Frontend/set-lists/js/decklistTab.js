@@ -180,6 +180,7 @@ export async function removingFromDeck(cardId) {
   } else {
     decklist[decklistId][cardId].count += 1;
   }
+  refreshDecklist();
 };
 
 export async function deletingFromDeck(cardId) {
@@ -199,6 +200,7 @@ export async function deletingFromDeck(cardId) {
   if (response.ok) {
     console.log("Deleted entry successfully.");
   }
+  refreshDecklist();
 };
    
 export async function refreshDecklist() {
@@ -220,7 +222,7 @@ export async function refreshDecklist() {
   );
   console.log(cards);
   
-  document.querySelector(".pokemonCard").replaceWith(...buildDecklistTab(cards));
+  document.querySelector(".decklist").replaceChildren(...buildDecklistTab(cards));
 };
   
 
