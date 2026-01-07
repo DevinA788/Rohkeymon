@@ -1,8 +1,12 @@
+import {buildDecklistTab, deletingFromDeck, decklistTabPrimer, removingFromDeck, initializeDecklistTab, getDecklist, getName, refreshDecklist} from "./decklistTab.js";
+
+
+
 const BASE_SET_ONE_UNIQUES = 102
-var cardId = 0
-let decklist = {}
-let count = 0
-let decklistId = "44764e09-bf3d-11f0-a784-d8bbc1d9bfc1";
+export var cardId = 0
+export let decklist = {}
+export let count = 0
+export let decklistId = "44764e09-bf3d-11f0-a784-d8bbc1d9bfc1";
 
 window.addEventListener('load', async function() { 
   await loadDecklist(decklistId);
@@ -11,13 +15,13 @@ window.addEventListener('load', async function() {
         const card=document.createElement("div")
         const addToDeck=document.createElement("BUTTON")
         const img=document.createElement("img")
-        addToDeck.className='add-to-deck'
+        addToDeck.className='grid-add-to-deck'
         addToDeck.id = `base1-${cardId + 1}`
         const removeFromDeck=document.createElement("BUTTON")
         removeFromDeck.className='remove-from-deck'
         
         addToDeck.addEventListener("click", async (event)=> {
-          alert(`Attempting to add card ${addToDeck.id} to deck...`)
+          //alert(`Attempting to add card ${addToDeck.id} to deck...`)
           await addingToDeck(addToDeck.id)
           
           //addingToDecklistTab(event.target.id)
@@ -34,7 +38,7 @@ window.addEventListener('load', async function() {
     // NOTE: innerText for variables.
 });
 
-async function loadDecklist(decklistId) {
+export async function loadDecklist(decklistId) {
   const response = await fetch(`http://localhost:8080/api/decklist/${decklistId}/cards-map`);
   const cardsMap = await response.json();
   
@@ -43,8 +47,7 @@ async function loadDecklist(decklistId) {
   // Now decklist is: {"44764e09...": {"base1-6": {count: 3}, "base1-4": {count: 2}}}
 }
 
-async function addingToDeck(cardId) {
-  let decklistId = "44764e09-bf3d-11f0-a784-d8bbc1d9bfc1"; //pass in as arg on 32 from dropdown
+export async function addingToDeck(cardId) {
   document.getElementById(cardId).disabled = true
   if (!decklist[decklistId]) { // see if id's  in deck, init if not 
     decklist[decklistId] = {};
@@ -69,7 +72,7 @@ async function addingToDeck(cardId) {
     body: JSON.stringify({
       decklist_id: decklistId,
       card_id: cardId,
-      card_copies: 1
+      card_copies: 1 //hardcoded to let API handle incrementing
     }),
   }) 
   if (response.ok) {
@@ -81,12 +84,14 @@ async function addingToDeck(cardId) {
       alert("Maximum copies reached");
       //alert(decklist?.message?decklist.message:"Unknown Error.") Ternary operator
     }
-    //rebuild decklist here if worked. if not, else: decrement card count 
+    
+     
   } else {
     decklist[decklistId][cardId].count -= 1;
   }
-  
-    document.getElementById(cardId).disabled = false
+    refreshDecklist();
+
+  document.getElementById(cardId).disabled = false
 }
 
 

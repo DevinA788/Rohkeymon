@@ -1,4 +1,7 @@
-async function getName(card_id) {
+import {cardId, decklist, count, decklistId, addingToDeck, loadDecklist} from "./main.js";
+
+
+export async function getName(card_id) {
   try {
     const response = await fetch(`https://api.tcgdex.net/v2/en/cards/${card_id}`);
     if (response.ok) {
@@ -13,7 +16,7 @@ async function getName(card_id) {
   }
 }
 
-function buildDecklistTab(cards) { 
+export function buildDecklistTab(cards) { 
   /*
   Builds decklist of cards from array of card objects. 
   Card objects should have name and quantity. 
@@ -39,8 +42,8 @@ function buildDecklistTab(cards) {
     addToDeck.className = 'add-to-deck';
     addToDeck.id = card_id;
     addToDeck.addEventListener("click", async (event)=> {
+      //alert(`Adding card ${addToDeck.id} to deck.`)
       await addingToDeck(addToDeck.id)
-      alert(`Adding card ${addToDeck.id} to deck.`)
     });
 
     const removeFromDeck = document.createElement("BUTTON");
@@ -48,35 +51,55 @@ function buildDecklistTab(cards) {
     removeFromDeck.className = 'remove-from-deck';
     removeFromDeck.id = card_id;
     removeFromDeck.addEventListener("click", async (event)=> {
+      //alert(`Removing card ${removeFromDeck.id} from deck.`)
       await removingFromDeck(removeFromDeck.id)
-      alert(`Removing card ${removeFromDeck.id} from deck.`)
+      
+
+    })
+
+    const deleteFromDeck = document.createElement("BUTTON");
+    const deleteImg = document.createElement("img");
+    deleteImg.src = "./assets/trashcan.png";
+    deleteFromDeck.appendChild(deleteImg);
+    deleteFromDeck.className = 'delete-from-deck';
+    deleteFromDeck.id = card_id;
+    deleteFromDeck.addEventListener("click", async (event)=> {
+      alert(`Deleting entry ${deleteFromDeck.id} from decklist.`)
+      await deletingFromDeck(deleteFromDeck.id)
+      
 
     })
     
     pokemonCard.appendChild(nameDiv);
-    pokemonCard.appendChild(copiesDiv);
     pokemonCard.appendChild(addToDeck);
+    pokemonCard.appendChild(copiesDiv);
     pokemonCard.appendChild(removeFromDeck);
+    pokemonCard.appendChild(deleteFromDeck);
     return pokemonCard;
   });
 }
 
-async function getDecklist() {
+export async function getDecklist(decklistId) {
   try {
-    const response = await fetch("http://localhost:8080/api/decklist");
+    const response = await fetch(`http://localhost:8080/api/decklist/${decklistId}/cards-map`);
     if (response.ok) {
-      const data = await response.json();
+      const cardsMap = await response.json();
       //console.log(data);
-      return data;
+      const decklistArray = Object.entries(cardsMap).map(([cardId, cardData]) => ({
+        card_id: cardId,
+        card_copies: cardData.count
+      }));
+      return decklistArray;
     } else {
       throw new Error('Failed to fetch decklist');
     }
   } catch (error) {
     console.error('Error:', error);
+    return [];
   }
 }
 
-function initializeDecklistTab() {
+export function initializeDecklistTab() {
   let decklistButton = document.querySelector('.decklistButton');
   let closeDecklist = document.querySelector('.close');
   let toggleContainer = document.querySelector('#decklistContainer');
@@ -90,17 +113,22 @@ function initializeDecklistTab() {
   });
 };
 
-window.addEventListener("load", async function() {
+export async function decklistTabPrimer() {
   //TODO: click handlers - disable addToDeck button
 
   initializeDecklistTab();
 
-  decklist = await getDecklist(); //This fetch gets decklist card objects from API
+  const decklistArray = await getDecklist(decklistId); //This fetch gets decklist card objects from API
+
+  if (!decklistArray || !Array.isArray(decklistArray)) {
+    console.error('Decklist not loaded or wrong format loaded');
+    return;
+  }
 
   //TODO: figure out how to get decklist to show contents without needing to refresh page. 
 
   const cards = await Promise.all(
-    decklist.map(async (card) => {
+    decklistArray.map(async (card) => {
       const cardName = await getName(card.card_id);
       return {
         ...card, //Instead of returning properties manually, allows new properties to be added later on
@@ -113,49 +141,88 @@ window.addEventListener("load", async function() {
   document.querySelector(".decklist").append(...buildDecklistTab(cards));
 
   //TODO: click handlers - reenable addToDeck button 
-});
+};
 
-async function removingFromDeck(cardId) {
-  let decklistId = "44764e09-bf3d-11f0-a784-d8bbc1d9bfc1"; 
+window.addEventListener("load", ()=>decklistTabPrimer())
 
-  console.log("decklist:", decklist);
-  console.log("decklist[decklistId]:", decklist[0]);
-  console.log("cardId:", cardId);
-  if (!decklist[decklistId]) { // see if id's  in deck, init if not 
+export async function removingFromDeck(cardId) {
+  console.log(cardId);
+  
+  if (!decklist[decklistId]) { // see if id's in deck, init if not 
     decklist[decklistId] = {};
   }
-
-  if (!decklist[decklistId]) { 
+  if (decklist[decklistId][cardId].count) {
+    console.log(decklist[decklistId][cardId].count + " (Before)");
+  }
+  if (!decklist[decklistId][cardId]) { 
     decklist[decklistId][cardId] = {count: 0}; //If no decklist exists, initialize object values
   }
- 
+  //console.log(decklist[decklistId][cardId].count + " (Before)");
 
-  decklist[decklistId][cardId].count = decklist[decklistId][cardId].count - 1
-  if (decklist[decklistId][cardId].count < 0) {
-    decklist[decklistId][cardId].count += 1;
+  decklist[decklistId][cardId].count = decklist[decklistId][cardId].count - 1;
+  if (decklist[decklistId][cardId].count < 0) { //If somehow count is negative, set to 0.
+    decklist[decklistId][cardId].count = 0;
     return;
   }
-  const response = await fetch("http://localhost:8080/api/add-to-deck", {
-    method: "POST",
+  console.log(decklist[decklistId][cardId].count + " (After)");
+  const response = await fetch("http://localhost:8080/api/decrement-copies", {
+    method: "PATCH",
     headers: {"Content-Type": "application/json",},
     body: JSON.stringify({
       decklist_id: decklistId,
       card_id: cardId,
-      card_copies: decklist[decklistId][cardId].count
+      card_copies: 1 //hardcoded to let API handle decrementing
     }),
   }) 
   if (response.ok) {
-    const decklist = await response.json();
-    if (decklist.card_copies == 0) {
-      pokemonCard.remove();
-    }
-    //rebuild decklist here if worked. if not, else: decrement card count 
+    const updatedDecklist = await response.json();
   } else {
     decklist[decklistId][cardId].count += 1;
   }
+  refreshDecklist();
 };
 
+export async function deletingFromDeck(cardId) {
+  //console.log(decklist[decklistId][cardId]);
+  if (!decklist[decklistId]) { // If wrong deck id, exit. 
+    return;
+  } 
+  console.log(cardId);
+  const response = await fetch("http://localhost:8080/api/delete-entry", {
+    method: "DELETE",
+    headers: {"Content-Type": "application/json",},
+    body: JSON.stringify({
+      decklist_id: decklistId,
+      card_id: cardId
+    }),
+  })
+  if (response.ok) {
+    console.log("Deleted entry successfully.");
+  }
+  refreshDecklist();
+};
+   
+export async function refreshDecklist() {
+  const decklistArray = await getDecklist(decklistId); //This fetch gets decklist card objects from API
+
+  if (!decklistArray || !Array.isArray(decklistArray)) {
+    console.error('Decklist not loaded or wrong format loaded');
+    return;
+  }
+
+  const cards = await Promise.all(
+    decklistArray.map(async (card) => {
+      const cardName = await getName(card.card_id);
+      return {
+        ...card, //Instead of returning properties manually, allows new properties to be added later on
+        card_name: cardName
+      };
+    })
+  );
+  console.log(cards);
   
+  document.querySelector(".decklist").replaceChildren(...buildDecklistTab(cards));
+};
   
 
   
