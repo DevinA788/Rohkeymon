@@ -70,7 +70,7 @@
   background-color: black;
   color: white;
   overflow-y: scroll;
-  height: 80vh;
+  height: 70vh;
 }
 
 .decklist .pokemonCard {
@@ -160,4 +160,27 @@
   text-align: center;
   background: black;
   color: rgb(0, 217, 133);
+}
+
+.decklist-dropdown-container {
+  display: flex;
+  height: 200px;
+  color: white;
+}
+
+.decklist-dropdown {
+  position: relative;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: white;
+  min-width: 130px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  padding: 12px 16px;
+}
+
+.dropdownContent:hover .dropdown-content {
+  display: block;
 }
