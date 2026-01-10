@@ -162,25 +162,39 @@
   color: rgb(0, 217, 133);
 }
 
-.decklist-dropdown-container {
-  display: flex;
-  height: 200px;
-  color: white;
-}
-
 .decklist-dropdown {
-  position: relative;
+  display: relative;
+  height: 5vh;
+  color: rgb(0, 217, 133);
+  padding: 10px;
+  border-color: red;
+  border-style: solid;
 }
 
-.dropdown-content {
-  display: none;
+.decklist-dropdown-menu {
+  background-color:white;
   position: absolute;
-  background-color: white;
+  color: rgb(0, 217, 133);
   min-width: 130px;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   padding: 12px 16px;
+  opacity: 0;
+  transition: opacity 125ms ease-in-out transform 125ms ease-in-out;
+  pointer-events: none;
+  transform: translateY(-10px);
 }
 
-.dropdownContent:hover .dropdown-content {
-  display: block;
+.decklist-dropdown.active > .decklist-dropdown-button + .decklist-dropdown-menu {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.decklist-dropdown-button {
+  background: none;
+  border-color: purple;
+}
+
+.decklist-dropdown-button:hover {
+  color: white;
 }
