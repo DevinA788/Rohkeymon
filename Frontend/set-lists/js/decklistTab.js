@@ -1,11 +1,11 @@
-import {cardId, decklist, count, decklistId, addingToDeck, loadDecklist} from "./main.js";
+import { cardId, decklist, count, decklistId, addingToDeck, loadDecklist } from "./main.js";
 
 document.addEventListener('click', e => {
   const isDropdownButton = e.target.matches("[data-dropdown-button]")
-  if(!isDropdownButton && e.target.closest('[data-dropdown]') !=null) return
+  if (!isDropdownButton && e.target.closest('[data-dropdown]') != null) return
 
   let currentDropdown
-  if(isDropdownButton) {
+  if (isDropdownButton) {
     currentDropdown = e.target.closest('[data-dropdown]')
     currentDropdown.classList.toggle('active')
   }
@@ -15,6 +15,7 @@ document.addEventListener('click', e => {
     dropdown.classList.remove("active")
   })
 })
+
 
 export async function getName(card_id) {
   try {
@@ -31,13 +32,13 @@ export async function getName(card_id) {
   }
 }
 
-export function buildDecklistTab(cards) { 
+export function buildDecklistTab(cards) {
   /*
   Builds decklist of cards from array of card objects. 
   Card objects should have name and quantity. 
   Returns HTMLDivElement objects representing each card.
   */
-  return cards.map(({card_copies, card_id, card_name}) => {
+  return cards.map(({ card_copies, card_id, card_name }) => {
     const pokemonCard = document.createElement("div");
     pokemonCard.className = "pokemonCard";
     /*Can override class name for card(s) in the array if needed. Maybe use this to label energy cards because they can be > 4 copies. 
@@ -56,7 +57,7 @@ export function buildDecklistTab(cards) {
     addToDeck.innerText = '+';
     addToDeck.className = 'add-to-deck';
     addToDeck.id = card_id;
-    addToDeck.addEventListener("click", async (event)=> {
+    addToDeck.addEventListener("click", async (event) => {
       //alert(`Adding card ${addToDeck.id} to deck.`)
       await addingToDeck(addToDeck.id)
     });
@@ -65,10 +66,10 @@ export function buildDecklistTab(cards) {
     removeFromDeck.innerText = '-';
     removeFromDeck.className = 'remove-from-deck';
     removeFromDeck.id = card_id;
-    removeFromDeck.addEventListener("click", async (event)=> {
+    removeFromDeck.addEventListener("click", async (event) => {
       //alert(`Removing card ${removeFromDeck.id} from deck.`)
       await removingFromDeck(removeFromDeck.id)
-      
+
 
     })
 
@@ -78,13 +79,13 @@ export function buildDecklistTab(cards) {
     deleteFromDeck.appendChild(deleteImg);
     deleteFromDeck.className = 'delete-from-deck';
     deleteFromDeck.id = card_id;
-    deleteFromDeck.addEventListener("click", async (event)=> {
+    deleteFromDeck.addEventListener("click", async (event) => {
       alert(`Deleting entry ${deleteFromDeck.id} from decklist.`)
       await deletingFromDeck(deleteFromDeck.id)
-      
+
 
     })
-    
+
     pokemonCard.appendChild(nameDiv);
     pokemonCard.appendChild(addToDeck);
     pokemonCard.appendChild(copiesDiv);
@@ -152,25 +153,25 @@ export async function decklistTabPrimer() {
     })
   );
   console.log(cards);
-  
+
   document.querySelector(".decklist").append(...buildDecklistTab(cards));
 
   //TODO: click handlers - reenable addToDeck button 
 };
 
-window.addEventListener("load", ()=>decklistTabPrimer())
+window.addEventListener("load", () => decklistTabPrimer())
 
 export async function removingFromDeck(cardId) {
   console.log(cardId);
-  
+
   if (!decklist[decklistId]) { // see if id's in deck, init if not 
     decklist[decklistId] = {};
   }
   if (decklist[decklistId][cardId].count) {
     console.log(decklist[decklistId][cardId].count + " (Before)");
   }
-  if (!decklist[decklistId][cardId]) { 
-    decklist[decklistId][cardId] = {count: 0}; //If no decklist exists, initialize object values
+  if (!decklist[decklistId][cardId]) {
+    decklist[decklistId][cardId] = { count: 0 }; //If no decklist exists, initialize object values
   }
   //console.log(decklist[decklistId][cardId].count + " (Before)");
 
@@ -182,13 +183,13 @@ export async function removingFromDeck(cardId) {
   console.log(decklist[decklistId][cardId].count + " (After)");
   const response = await fetch("http://localhost:8080/api/decrement-copies", {
     method: "PATCH",
-    headers: {"Content-Type": "application/json",},
+    headers: { "Content-Type": "application/json", },
     body: JSON.stringify({
       decklist_id: decklistId,
       card_id: cardId,
       card_copies: 1 //hardcoded to let API handle decrementing
     }),
-  }) 
+  })
   if (response.ok) {
     const updatedDecklist = await response.json();
   } else {
@@ -201,11 +202,11 @@ export async function deletingFromDeck(cardId) {
   //console.log(decklist[decklistId][cardId]);
   if (!decklist[decklistId]) { // If wrong deck id, exit. 
     return;
-  } 
+  }
   console.log(cardId);
   const response = await fetch("http://localhost:8080/api/delete-entry", {
     method: "DELETE",
-    headers: {"Content-Type": "application/json",},
+    headers: { "Content-Type": "application/json", },
     body: JSON.stringify({
       decklist_id: decklistId,
       card_id: cardId
@@ -216,7 +217,7 @@ export async function deletingFromDeck(cardId) {
   }
   refreshDecklist();
 };
-   
+
 export async function refreshDecklist() {
   const decklistArray = await getDecklist(decklistId); //This fetch gets decklist card objects from API
 
@@ -235,9 +236,9 @@ export async function refreshDecklist() {
     })
   );
   console.log(cards);
-  
+
   document.querySelector(".decklist").replaceChildren(...buildDecklistTab(cards));
 };
-  
 
-  
+
+
