@@ -11,7 +11,7 @@
   width: 75px;
   align-items: center;
   position: fixed;
-  background-color:  rgb(85, 26, 139)
+  background-color: rgb(85, 26, 139)
 }
 
 .decklistButton img {
@@ -70,7 +70,7 @@
   background-color: black;
   color: white;
   overflow-y: scroll;
-  height: 80vh;
+  height: 70vh;
 }
 
 .decklist .pokemonCard {
@@ -160,4 +160,46 @@
   text-align: center;
   background: black;
   color: rgb(0, 217, 133);
+}
+
+.decklist-dropdown {
+  display: relative;
+  height: 5vh;
+  color: rgb(0, 217, 133);
+  padding: 10px;
+  border-color: red;
+  border-style: solid;
+}
+
+.decklist-dropdown-menu {
+  background-color: black;
+  position: absolute;
+  color: rgb(0, 217, 133);
+  min-width: 130px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  padding: 12px 16px;
+  opacity: 0;
+  transition: opacity 125ms ease-in-out transform 125ms ease-in-out;
+  pointer-events: none;
+  transform: translateY(-10px);
+}
+
+.decklist-dropdown.active>.decklist-dropdown-button+.decklist-dropdown-menu {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.decklist-dropdown-button {
+  background: none;
+  border-color: purple;
+  color: rgb(0, 217, 133);
+}
+
+.decklist-dropdown-button:hover {
+  color: white;
+}
+
+.new-deck-input {
+  color: Purple;
 }
