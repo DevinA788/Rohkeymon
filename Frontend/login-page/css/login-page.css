@@ -2,4 +2,10 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  background: black;
+  color: white;
+}
+
+.wrapper {
+  display: flex;
 }
