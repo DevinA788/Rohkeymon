@@ -21,9 +21,9 @@ public class UsersRepo {
 
     private JdbcTemplate jdbcTemplate;
 
-    public Username save(Username username){
+    public Users save(Users username){
 
-        String sqlString = "INSERT INTO users (user_id, username, card_copies) VALUES (?, ?, 1) ON DUPLICATE KEY UPDATE card_copies = LEAST(card_copies + 1, 4);";
+        String sqlString = "INSERT INTO users (user_id, username, card_copies) VALUES (?, ?, 1)";
 
         jdbcTemplate.update(sqlString, decklists.getDecklist_id(), decklists.getCard_id());
 

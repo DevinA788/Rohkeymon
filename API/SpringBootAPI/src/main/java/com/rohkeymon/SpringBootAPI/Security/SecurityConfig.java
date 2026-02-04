@@ -12,12 +12,12 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity
 public class SecurityConfig {
 
-    @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception{
-        return httpSecurity
-                .csrf(AbstractHttpConfigurer::disable)
+    @Bean //Custom filter chain bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
+        return http.build();
+                /*.csrf(AbstractHttpConfigurer::disable)
                 .formLogin(httpForm ->{
                     httpForm.loginPage("/req/login").permitAll();
-                    httpForm.defaultSuccessUrl("/index");
+                    httpForm.defaultSuccessUrl("/index"); */
     }
 }
