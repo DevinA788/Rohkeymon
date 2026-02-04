@@ -13,11 +13,11 @@ import org.springframework.security.web.SecurityFilterChain;
 public class SecurityConfig {
 
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
+    public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception{
         return httpSecurity
-                .formLogin(httpForm -> {
-                    httpForm
-                            .loginPage(loginPage:"/index.html").permitAll();
-                })
+                .csrf(AbstractHttpConfigurer::disable)
+                .formLogin(httpForm ->{
+                    httpForm.loginPage("/req/login").permitAll();
+                    httpForm.defaultSuccessUrl("/index");
     }
 }
