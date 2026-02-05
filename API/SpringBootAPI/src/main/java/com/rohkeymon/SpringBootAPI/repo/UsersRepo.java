@@ -12,7 +12,7 @@ import org.springframework.stereotype.Repository;
 public class UsersRepo {
     public JdbcTemplate getJdbcTemplate() {
         return jdbcTemplate;
-    }
+
 }
     @Autowired
     public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
@@ -21,17 +21,11 @@ public class UsersRepo {
 
     private JdbcTemplate jdbcTemplate;
 
-    public Users save(Users username){
+    public void save(Users users) {
 
-        String sqlString = "INSERT INTO users (user_id, username, card_copies) VALUES (?, ?, 1)";
+        String sqlString = "INSERT INTO users (user_id, username, hashed_pw) VALUES (?, ?, ?)";
 
-        jdbcTemplate.update(sqlString, decklists.getDecklist_id(), decklists.getCard_id());
-
-        String sqlSelect = "SELECT * FROM rohkeymon_decklists WHERE decklist_id = ? AND card_id = ?";
-        RowMapper<Decklists> rm = new BeanPropertyRowMapper<>(Decklists.class);
-
-        return jdbcTemplate.queryForObject(sqlSelect, rm,
-                decklists.getDecklist_id(),
-                decklists.getCard_id());
+        jdbcTemplate.update(sqlString, users.getUser_id(), users.getUsername(), users.getHashed_pw());
 
     }
+};
