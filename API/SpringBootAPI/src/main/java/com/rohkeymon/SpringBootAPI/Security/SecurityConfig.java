@@ -18,6 +18,7 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
 
         http.csrf(customizer -> customizer.disable());
+        //Configure which request need to be authenticated. Specify /register and /login and require auth for all other resources. Define request matchers for public endpoints.
         http.sessionManagement(session ->session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
         return http.build();
     }
