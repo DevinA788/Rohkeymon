@@ -1,4 +1,4 @@
-package com.rohkeymon.SpringBootAPI.MainController;
+package com.rohkeymon.SpringBootAPI.controller;
 
 import java.util.HashMap;
 import java.util.List;
