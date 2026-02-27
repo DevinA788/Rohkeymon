@@ -20,6 +20,10 @@ public class SecurityConfig {
         http.csrf(customizer -> customizer.disable());
         //Configure which request need to be authenticated. Specify /register and /login and require auth for all other resources. Define request matchers for public endpoints.
         http.sessionManagement(session ->session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
+        http.authorizeHttpRequests(request -> request
+                .requestMatchers("/register", "/login").permitAll()
+                .anyRequest().authenticated()
+        );
         return http.build();
     }
 }
