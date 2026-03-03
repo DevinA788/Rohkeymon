@@ -26,6 +26,5 @@ public class UsersRepo {
         String sqlString = "INSERT INTO users (user_id, username, hashed_pw) VALUES (?, ?, ?)";
 
         jdbcTemplate.update(sqlString, users.getUser_id(), users.getUsername(), users.getHashed_pw());
-
     }
 };
