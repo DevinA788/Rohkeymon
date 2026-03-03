@@ -14,8 +14,10 @@ public class UserController {
     UsersRepo usersRepo;
 
     @PostMapping("/register")
-    public Users register(@RequestBody Users user){
-        return usersRepo.save(Users);
+    public String register(@RequestBody Users user){
+        usersRepo.save(user);
+        String successString = "User Registered.";
+        return successString;
     }
 
 }
