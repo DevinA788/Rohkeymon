@@ -8,7 +8,7 @@ public class Users {
     private String username;
     private String email;
     private String user_id;
-    private String hashed_pw;
+    private String password;
     private LocalDateTime created_at;
 
     public String getUser_id() {
@@ -19,12 +19,12 @@ public class Users {
         this.user_id = user_id;
     }
 
-    public String getHashed_pw() {
-        return hashed_pw;
+    public String getPassword() {
+        return password;
     }
 
-    public void setHashed_pw(String hashed_pw) {
-        this.hashed_pw = hashed_pw;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public LocalDateTime getCreated_at() {
