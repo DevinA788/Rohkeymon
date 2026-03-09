@@ -14,7 +14,7 @@ public class UserController {
     @Autowired
     private UserService service;
 
-    @PostMapping("/register")
+    @PostMapping("/api/register")
     public String register(@RequestBody Users users){
         service.register(users);
         return "User registered successfully";
