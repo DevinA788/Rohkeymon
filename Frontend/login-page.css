@@ -1,0 +1,63 @@
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: black;
+  color: white;
+}
+
+.wrapper {
+  margin: 60px;
+  position: relative;
+  width: 400px;
+  height: 440px;
+  display: flex;
+  border: solid;
+  backdrop-filter: blur(20px);
+  /*justify-content: center;*/
+  align-items: center;
+  background: transparent;
+}
+
+.wrapper .form-box {
+  width: 100%;
+  padding: 40px;
+}
+
+.form-box {
+  width: 100%;
+  padding: 40px;
+}
+
+.remember-forgot {
+
+}
+
+.login-register {
+  color: yellow;
+}
+
+.login-register p a {
+  color: yellow;
+}
+
+.register-link {
+  
+}
+
+.wrapper .form-box.login {
+  
+}
+
+.wrapper.active .form-box.login{
+  transform: translateX(-410px);
+}
+
+.wrapper .form-box.register {
+  position: absolute;
+  transform: translateX(410px);
+}
+
+.wrapper.active .form-box.register {
+  transform: translate(0px);
+}

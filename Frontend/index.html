@@ -6,19 +6,76 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Rohkeymon - Welcome!</title>
   <link rel="stylesheet" href="/general.css">
+  <link rel="stylesheet" href="login-page.css">
   <link rel="stylesheet" href="/templates/header.css">
   <script src="/js/main.js" async defer></script>
   <script src="/templates/header.js"></script>
+  <script src="index.js" defer></script>
   <!-- Waits for page to load before running js-->
 </head>
 
-<body class="main-content">
+<body>
   <header id="header" class="header">
 
   </header>
-  Welcome!
-  <a href="/set-lists">View Set Lists</a>
-  <!-- Login creds, etc  -->
+  <div class="wrapper">
+    <div class="form-box login">
+      <form action="">
+        <h2>Login</h2>
+        <div class="input-box">
+          <span class="icon"></span>
+          <ion-icon name="person-outline"></ion-icon>
+          <input type="email" required>
+          <label>Email</label>
+        </div>
+        <div class="input-box">
+          <span class="icon"></span>
+          <ion-icon name="lock-closed-outline"></ion-icon>
+          <input type="password" required>
+          <label>Password</label>
+        </div>
+        <button type="submit">Login</button>
+        <div class="remember-forgot">
+          <p><a href="#">Forgot Password?</a></p>
+        </div>
+        <div class="login-register">
+          <p><a href="#" class="register-link">Register New Account</a></p>
+        </div>
+      </form>
+    </div>
+    <div class="form-box register">
+      <form action="#">
+        <h2>Register</h2>
+        <div class="input-box">
+          <span class="icon"></span>
+          <ion-icon name="mail-outline"></ion-icon>
+          <input type="username" required>
+          <label>Username</label>
+        </div>
+        <div class="input-box">
+          <span class="icon"></span>
+          <ion-icon name="person-outline"></ion-icon>
+          <input type="email" required>
+          <label>Email</label>
+        </div>
+        <div class="input-box">
+          <span class="icon"></span>
+          <ion-icon name="lock-closed-outline"></ion-icon>
+          <input type="password" required>
+          <label>Password</label>
+        </div>
+        <button type="submit">Register</button>
+        <div class="remember-forgot">
+          <label><input type="checkbox">Pact with the Devil</label>
+        </div>
+        <div class="login-register">
+          <p><a href="#" class="login-link">Register New Account</a></p>
+        </div>
+      </form>
+    </div>
+  </div>
+<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 </body>
 
 </html>
