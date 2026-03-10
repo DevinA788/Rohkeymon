@@ -22,9 +22,9 @@ public class UsersRepo {
 
     public void save(Users users) {
 
-        String sqlString = "INSERT INTO users (username, hashed_pw) VALUES (?, ?)";
+        String sqlString = "INSERT INTO users (username, hashed_pw, email) VALUES (?, ?, ?)";
 
-        jdbcTemplate.update(sqlString, users.getUsername(), users.getPassword());
+        jdbcTemplate.update(sqlString, users.getUsername(), users.getPassword(), users.getEmail());
     }
 
     public boolean findUsername(String username) {

@@ -22,7 +22,6 @@ public class UserService {
         } else {
             String password = users.getPassword();
             String hashed_pw = bCryptPasswordEncoder.encode(password);
-            System.out.println(password);
             users.setPassword(hashed_pw);
             usersRepo.save(users);
             }
