@@ -16,10 +16,16 @@ public class UserService {
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     public void register(Users users){
-        String password = users.getPassword();
-        String hashed_pw = bCryptPasswordEncoder.encode(password);
-        users.setPassword(hashed_pw);
-        usersRepo.save(users);
+        Boolean dupUsernameQuery = usersRepo.findUsername(users.getUsername());
+            if (dupUsernameQuery) {
+                throw new RuntimeException("Sorry buddy, this name is TAKEN");
+        } else {
+            String password = users.getPassword();
+            String hashed_pw = bCryptPasswordEncoder.encode(password);
+            System.out.println(password);
+            users.setPassword(hashed_pw);
+            usersRepo.save(users);
+            }
     }
 
 }

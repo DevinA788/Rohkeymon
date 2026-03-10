@@ -5,6 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public class UsersRepo {
     public JdbcTemplate getJdbcTemplate() {
@@ -23,5 +25,16 @@ public class UsersRepo {
         String sqlString = "INSERT INTO users (username, hashed_pw) VALUES (?, ?)";
 
         jdbcTemplate.update(sqlString, users.getUsername(), users.getPassword());
+    }
+
+    public boolean findUsername(String username) {
+        String sqlUsernameSearch = "SELECT COUNT(*) FROM users WHERE username = (?)";
+        Integer queryResult = jdbcTemplate.queryForObject(sqlUsernameSearch, Integer.class, username);
+            if (queryResult > 0) {
+                return true;
+            } else {
+                return false;
+            }
+
     }
 };
