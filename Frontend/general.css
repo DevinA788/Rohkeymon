@@ -4,6 +4,9 @@ body {
   background-color: rgb(196, 196, 196);
   background-color: black;
   background-attachment: fixed;
+  color: rgb(0, 217, 133);
+
+  font-family: "Roboto Flex", sans-serif;
 }
 
 .main-content {

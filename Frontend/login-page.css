@@ -29,35 +29,34 @@ body {
   padding: 40px;
 }
 
-.remember-forgot {
-
-}
+.remember-forgot {}
 
 .login-register {
-  color: yellow;
+  color: white;
 }
 
 .login-register p a {
-  color: yellow;
+  color: white;
 }
 
-.register-link {
-  
-}
+.register-link {}
 
 .wrapper .form-box.login {
-  
+  transition: .5s;
 }
 
-.wrapper.active .form-box.login{
+.wrapper.active .form-box.login {
   transform: translateX(-410px);
+  transition: .5s;
 }
 
 .wrapper .form-box.register {
   position: absolute;
   transform: translateX(410px);
+  transition: .5s;
 }
 
 .wrapper.active .form-box.register {
   transform: translate(0px);
+  transition: .5s;
 }
