@@ -4,9 +4,38 @@ const registerLink = document.querySelector('.register-link');
 
 registerLink.addEventListener('click', () => { 
   wrapper.classList.add('active');
-  console.log("hiiii");
 });
 
 loginLink.addEventListener('click', () => { 
   wrapper.classList.remove('active');
 });
+
+//Capture Registration From Data and Fetch
+const registrationElem = document.querySelector(".form-box.register form");
+console.log(registrationElem);
+registrationElem.addEventListener('submit', event => {
+  event.preventDefault();
+
+  const registrationData = new FormData(registrationElem);
+  console.log(registrationData);
+  const data = new URLSearchParams(registrationData);
+  console.log(data);
+
+  sendRegistration(data);
+})
+
+//Send the form data
+async function sendRegistration(data) {
+  try {
+    const response = await fetch("http://localhost:8080/api/register", {
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      body: data,
+    }
+    );
+  } catch (e) {
+    console.error(e)
+  }
+}
