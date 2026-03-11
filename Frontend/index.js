@@ -30,9 +30,13 @@ async function sendRegistration(data) {
     const response = await fetch("http://localhost:8080/api/register", {
       method: "POST",
       headers: {
-        'Content-Type': 'application/x-www-form-urlencoded'
+        'Content-Type': 'application/json'
       },
-      body: data,
+      body: JSON.stringify({
+        username: data.get('text'),
+        email: data.get('email'),
+        password: data.get('password')
+      }),
     }
     );
   } catch (e) {
