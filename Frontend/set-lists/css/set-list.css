@@ -27,7 +27,7 @@
 }
 
 .card-grid div {
-  background-color: #f1f1f1;
+  background-color: rgb(44, 44, 44);
   border: none;
   padding: 0px;
   font-size: 30px;
@@ -69,4 +69,3 @@
   padding: 0;
   border: none;
 }
-
