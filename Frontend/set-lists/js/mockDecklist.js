@@ -8,7 +8,7 @@ function buildDecklistTab() {
     pokemonCard.className = "pokemonCard";
     /*Can override class name for card(s) in the array if needed. Maybe use this to label energy cards because they can be > 4 copies. 
     if (cardClassName) {
-      pokemonCard.classList.add(cardclassName);
+    pokemonCard.classList.add(cardclassName);
     }*/
     const nameDiv = document.createElement("div");
     nameDiv.className = "name";
@@ -41,6 +41,7 @@ function buildDecklistTab() {
     pokemonCard.appendChild(copiesDiv);
     pokemonCard.appendChild(removeFromDeck);
     pokemonCard.appendChild(deleteFromDeck);
+
     return pokemonCard;
 }
 
