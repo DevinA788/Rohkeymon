@@ -2,7 +2,7 @@ package com.rohkeymon.SpringBootAPI.controller;
 
 import com.rohkeymon.SpringBootAPI.model.Users;
 import com.rohkeymon.SpringBootAPI.repo.UsersRepo;
-import com.rohkeymon.SpringBootAPI.service.UserService;
+/*import com.rohkeymon.SpringBootAPI.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,4 +23,4 @@ public class UserController {
         return "User registered successfully";
     }
 
-}
+}*/

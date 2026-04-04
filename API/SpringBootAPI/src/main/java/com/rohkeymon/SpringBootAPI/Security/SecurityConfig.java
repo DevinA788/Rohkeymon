@@ -1,4 +1,4 @@
-package com.rohkeymon.SpringBootAPI.Security;
+/*package com.rohkeymon.SpringBootAPI.Security;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Bean;
@@ -32,4 +32,4 @@ public class SecurityConfig {
     public BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
-}
+}*/

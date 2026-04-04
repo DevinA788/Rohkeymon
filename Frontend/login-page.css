@@ -6,7 +6,7 @@ body {
   color: white;
 }
 
-h2 {
+.form-box h2 {
   text-align: center;
 }
 
@@ -21,11 +21,9 @@ p {
   height: 440px;
   display: flex;
   border: solid;
-  backdrop-filter: blur(20px);
   /*justify-content: center;*/
   align-items: center;
-  background: transparent;
-  /*overflow: hidden;*/
+  overflow: hidden;
 }
 
 .wrapper .form-box {
@@ -82,6 +80,7 @@ p {
 
 .input-box input {
   background: black;
+  color: rgb(0, 217, 133);
   border: solid;
   border-color: rgb(0, 217, 133);
   border-width: 1px;

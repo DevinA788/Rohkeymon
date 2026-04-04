@@ -3,7 +3,7 @@ package com.rohkeymon.SpringBootAPI.service;
 import com.rohkeymon.SpringBootAPI.model.Users;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+/*import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import com.rohkeymon.SpringBootAPI.repo.UsersRepo;
 
 @Service
@@ -27,4 +27,4 @@ public class UserService {
             }
     }
 
-}
+}*/
