@@ -1,19 +1,19 @@
-window.addEventListener('load', function() {
-  //DOM - learn it 
-  const setList=document.getElementById("pokemonlist")
-  fetch("http://127.0.0.1:8080/Rohkeymon/alldata").then(r=>r.json()).then(d=>{
+window.addEventListener('load', function () {
+
+  const setList = document.getElementById("pokemonlist")
+  fetch("http://127.0.0.1:8080/Rohkeymon/alldata").then(r => r.json()).then(d => {
     d.forEach(
-      p=>{
-        const card=document.createElement("div")
-        const img=document.createElement("img")
-        img.src=`https://images.pokemontcg.io/base1/${p.card_id}.png`
-        card.className="card-item"
+      p => {
+        const card = document.createElement("div")
+        const img = document.createElement("img")
+        img.src = `https://images.pokemontcg.io/base1/${p.card_id}.png`
+        card.className = "card-item"
         card.appendChild(img)
         setList.appendChild(card)
       }
     )
     console.log(d); /*Subject to CSS if user input is introduced*/
-    
+
     // NOTE: innerText for variables.
   })
 });
